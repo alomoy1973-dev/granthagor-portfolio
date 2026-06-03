@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>গ্রন্থাগার | আলোময় চাকমা</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — কবিতা, ছোটগল্প এবং গভীর ভাবনার এক ডিজিটাল সংগ্রহশালা।">
+  <meta name="author" content="আলোময় চাকমা">
+  <meta name="keywords" content="আলোময় চাকমা, গ্রন্থাগার, বাংলা সাহিত্য, কবিতা, ছোটগল্প, পার্বত্য চট্টগ্রাম">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  
+  <!-- Vanilla CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <div class="container-max">
+      <nav>
+        <a href="#" class="logo nav-link" data-page="home">আলোময় চাকমা</a>
+        <div class="nav-links">
+          <a href="#" class="nav-link active" data-page="home">হোম</a>
+          <a href="#" class="nav-link" data-page="home" id="navWritingsLink">লেখনী</a>
+          <a href="#" class="nav-link" data-page="about">পরিচিতি</a>
+          
+          <!-- Theme Toggle Button -->
+          <button class="theme-toggle-btn" id="themeToggle" aria-label="থিম পরিবর্তন করুন">
+            <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+          </button>
+          
+          <button class="btn btn-primary" id="contactBtn">যোগাযোগ</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="container-max mt-stack-lg">
+    
+    <!-- A. HOME & LIBRARY VIEW -->
+    <div id="homeView">
+      
+      <!-- Hero Section -->
+      <section class="mb-stack-lg text-center" style="max-width: 720px; margin-left: auto; margin-right: auto;">
+        <h1 class="headline-lg mb-stack-sm" style="font-size: 56px; text-transform: uppercase;">গ্রন্থাগার</h1>
+        <p class="body-lg text-secondary italic">
+          ঋতুভেদে সংগৃহীত কিছু পর্যবেক্ষণ, ছন্দময় প্রতিধ্বনি এবং আখ্যানের সংকলন।
+        </p>
+      </section>
+
+      <!-- Category Navigation / Filter Header -->
+      <div class="reading-well">
+        <div class="filter-bar">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all">সব লেখা</button>
+            <button class="filter-tab" data-category="poem">কবিতা</button>
+            <button class="filter-tab" data-category="rhyme">ছড়া</button>
+          </div>
+          <div class="filter-sort">
+            <span class="material-symbols-outlined text-[18px]">sort</span>
+            <span class="label-sm">সাম্প্রতিক</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Article Spot (Bento Grid) -->
+      <section id="featuredContainer" class="mb-stack-lg">
+        <!-- Dynamically injected featured story card -->
+      </section>
+
+      <!-- Poetry Section (List Layout) -->
+      <section id="poetrySection" class="reading-well mb-stack-lg">
+        <div class="section-divider">
+          <h3 class="headline-sm">কবিতা</h3>
+          <div class="section-line"></div>
+        </div>
+        <div id="poetryContainer" class="poetry-list">
+          <!-- Dynamically injected poems list -->
+        </div>
+      </section>
+
+      <!-- Rhymes Section (List Layout) -->
+      <section id="rhymesSection" class="reading-well mb-stack-lg">
+        <div class="section-divider">
+          <h3 class="headline-sm">ছড়া</h3>
+          <div class="section-line"></div>
+        </div>
+        <div id="rhymesContainer" class="poetry-list">
+          <!-- Dynamically injected rhymes list -->
+        </div>
+      </section>
+
+      <!-- Short Stories Section (Grid Layout) -->
+      <section id="storiesSection" class="mb-stack-lg">
+        <div class="section-divider">
+          <h3 class="headline-sm">ছোটগল্প</h3>
+          <div class="section-line"></div>
+        </div>
+        <div id="storiesContainer" class="stories-grid">
+          <!-- Dynamically injected stories cards -->
+        </div>
+      </section>
+
+      <!-- Newsletter Signup -->
+      <section class="reading-well newsletter-section mb-stack-lg">
+        <h5 class="headline-sm mb-stack-sm">অসমাপ্ত কিছুর খোঁজে?</h5>
+        <p class="body-md text-secondary">
+          আমার নিউজলেটার, <span class="italic" style="color: var(--primary); font-weight: 500;">'দ্য ইনকওয়েল'</span>-এ সাবস্ক্রাইব করুন, প্রতি মাসে সরাসরি আপনার ডেস্কে খসড়া এবং প্রতিফলন পাওয়ার জন্য।
+        </p>
+        <form id="newsletterForm" class="newsletter-form">
+          <input type="email" class="input-minimalist" placeholder="ইমেইল ঠিকানা" required aria-label="ইমেইল ঠিকানা">
+          <button type="submit" class="btn btn-primary">সাবস্ক্রাইব</button>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- B. ABOUT VIEW (BIOGRAPHY) -->
+    <div id="aboutView" style="display: none;">
+      <section class="reading-well mb-stack-lg">
+        <div class="section-divider">
+          <h3 class="headline-sm">পরিচিতি</h3>
+          <div class="section-line"></div>
+        </div>
+        
+        <div class="bio-layout">
+          <div class="bio-image-wrapper">
+            <img src="writer.png" alt="আলোময় চাকমা" class="bio-image">
+          </div>
+          <div class="bio-text">
+            <h2 class="headline-md mb-stack-sm">আলোময় চাকমা</h2>
+            <p class="body-lg text-secondary italic mb-stack-sm">কবি ও কথাসাহিত্যিক</p>
+            
+            <p>আলোময় চাকমা পার্বত্য চট্টগ্রামের এক নিভৃত কোণে জন্মগ্রহণ করেন। পাহাড়ি ঝর্ণার কলতান, বুনো অর্কিডের সুবাস আর গভীর অরণ্যের নীরবতা তাঁর শৈশবকে আচ্ছন্ন করে রেখেছিল। এই প্রাকৃতিক নিস্তব্ধতা এবং আদিবাসী জীবনযাত্রার সহজ-সরল রূপটিই পরবর্তীতে তাঁর সাহিত্যের মূল ভিত্তি হয়ে দাঁড়ায়।</p>
+            
+            <p>তিনি ঢাকা বিশ্ববিদ্যালয় থেকে বাংলা সাহিত্যে উচ্চশিক্ষা গ্রহণ করেন। পড়াশোনা শেষ করে তিনি প্রথাগত করপোরেট জীবনে না গিয়ে নিজের পার্বত্য নিবাসে ফিরে যান এবং সেখানে বসেই লেখালেখি শুরু করেন। তাঁর কবিতা ও ছোটগল্পে আদিবাসী জীবনের জটিলতা, প্রকৃতির সাথে মানুষের আধ্যাত্মিক সংযোগ এবং এক গভীর বিষাদগাথা রূপ পায়।</p>
+            
+            <p>তাঁর ভাষা যেমন ঋজু, তেমনই রহস্যময়। তিনি মনে করেন, শব্দ কেবল যোগাযোগের মাধ্যম নয়, বরং এটি মানুষের অবচেতন মনের নীরব অভিব্যক্তি। বর্তমানে তিনি খাগড়াছড়ির একটি ছোট পাহাড়ি কাঠের কুটিরে বাস করেন এবং সেখানে বসেই তাঁর আসন্ন উপন্যাস ও কাব্যগ্রন্থের কাজ চালিয়ে যাচ্ছেন।</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- C. ARTICLE READER VIEW -->
+    <div id="readerView" style="display: none;">
+      <div class="reading-well">
+        <button class="reader-back" id="backButton">
+          <span class="material-symbols-outlined">arrow_back</span> ফিরে যান
+        </button>
+        <article id="readerContent">
+          <!-- Dynamically injected article content -->
+        </article>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Slide-over Contact Modal -->
+  <div id="contactModal" class="modal-overlay">
+    <div class="modal-container">
+      <div>
+        <div class="modal-header">
+          <h3 class="headline-sm" style="margin: 0;">যোগাযোগ</h3>
+          <button class="modal-close" id="closeModal" aria-label="বন্ধ করুন">
+            <span class="material-symbols-outlined text-[24px]">close</span>
+          </button>
+        </div>
+        <p class="body-md text-secondary mb-stack-md">
+          প্রকাশনা, সাহিত্যালোচনা বা যেকোনো জিজ্ঞাসার জন্য নিচের ফর্মে আপনার বার্তাটি লিখে পাঠান।
+        </p>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="contactName" class="form-label">আপনার নাম</label>
+            <input type="text" id="contactName" class="input-minimalist" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail" class="form-label">ইমেইল ঠিকানা</label>
+            <input type="email" id="contactEmail" class="input-minimalist" required>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage" class="form-label">বার্তা</label>
+            <textarea id="contactMessage" class="input-minimalist" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-full mt-stack-sm">বার্তা পাঠান</button>
+        </form>
+      </div>
+      <div>
+        <hr style="border: 0; border-top: 1px solid var(--outline-variant); margin: 32px 0 24px 0;">
+        <span class="label-sm text-secondary">সরাসরি যোগাযোগ:</span>
+        <p class="body-md" style="margin-top: 8px; font-weight: 500;">contact@alomoychakma.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container-max footer-content">
+      <div class="footer-brand">
+        <h4>আলোময় চাকমা</h4>
+        <p class="label-sm text-secondary">© ২০২৪ আলোময় চাকমা। সর্বস্বত্ব সংরক্ষিত।</p>
+      </div>
+      <div class="footer-links">
+        <a href="#" class="footer-link" id="footerNewsletterLink">নিউজলেটার</a>
+        <a href="#" class="footer-link" id="footerRssLink">RSS</a>
+        <a href="#" class="footer-link" id="footerArchiveLink">আর্কাইভ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Main Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Logs
+*.log
+localhost-8766.err.log
+localhost-8766.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Node
+node_modules/
+
+# Large binary/archive files (optional — remove lines below if you WANT these in the repo)
+*.docx
+*.zip
+docx_render_initial/
+strapi-backend/
