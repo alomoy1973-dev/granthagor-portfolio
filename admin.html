@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>গ্রন্থাগার | ড্যাশবোর্ড কন্ট্রোল প্যানেল</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- A. LOGIN SCREEN GATES -->
+  <div id="loginScreen" class="login-overlay">
+    <div class="login-card">
+      <div class="login-header">
+        <span class="material-symbols-outlined logo-icon">admin_panel_settings</span>
+        <h2>গ্রন্থাগার অ্যাডমিন প্যানেল</h2>
+        <p>সিস্টেম অ্যাক্সেস করতে পাসকোডটি প্রবেশ করান</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <input type="password" id="passcode" class="passcode-input" placeholder="পাসকোড দিন" required autofocus autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary w-full login-btn">প্রবেশ করুন</button>
+      </form>
+      <div id="loginError" class="login-error hidden">ভুল পাসকোড! আবার চেষ্টা করুন।</div>
+    </div>
+  </div>
+
+  <!-- B. ADMIN DASHBOARD PANEL -->
+  <div id="adminPanel" class="admin-container hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="material-symbols-outlined">menu_book</span>
+        <div class="header-text">
+          <h3>আলোময় চাকমা</h3>
+          <span>সাহিত্য ড্যাশবোর্ড</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-tab="dashboard">
+          <span class="material-symbols-outlined">dashboard</span> ড্যাশবোর্ড
+        </a>
+        <a href="#" class="nav-item" data-tab="writings">
+          <span class="material-symbols-outlined">list_alt</span> সব রচনা তালিকা
+        </a>
+        <a href="#" class="nav-item" data-tab="editor" id="newWritingBtn">
+          <span class="material-symbols-outlined">edit_note</span> নতুন রচনা যোগ
+        </a>
+        <a href="#" class="nav-item" data-tab="export">
+          <span class="material-symbols-outlined">system_update_alt</span> কোড এক্সপোর্ট (GitHub/Vercel)
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="index.html" class="btn-secondary w-full" target="_blank">
+          <span class="material-symbols-outlined">open_in_new</span> ওয়েবসাইট দেখুন
+        </a>
+        <button id="logoutBtn" class="btn-logout w-full">
+          <span class="material-symbols-outlined">logout</span> লগ আউট
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top header bar -->
+      <header class="content-header">
+        <h2 id="tabTitle">ড্যাশবোর্ড ওভারভিউ</h2>
+        <div class="header-actions">
+          <span class="user-badge"><span class="pulse-indicator"></span> অ্যাডমিন লাইভ</span>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <!-- 1. DASHBOARD OVERVIEW TAB -->
+        <section id="tab-dashboard" class="tab-content active">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon info"><span class="material-symbols-outlined">auto_stories</span></div>
+              <div class="stat-data">
+                <h4 id="totalCount">0</h4>
+                <p>মোট সাহিত্যকর্ম</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon success"><span class="material-symbols-outlined">history_edu</span></div>
+              <div class="stat-data">
+                <h4 id="poemCount">0</h4>
+                <p>কবিতা সংগ্রহ</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon warning"><span class="material-symbols-outlined">child_care</span></div>
+              <div class="stat-data">
+                <h4 id="rhymeCount">0</h4>
+                <p>ছড়া সংগ্রহ</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon error"><span class="material-symbols-outlined">star</span></div>
+              <div class="stat-data">
+                <h4 id="featuredCount">0</h4>
+                <p>ফিচার্ড করা রচনা</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-sections mt-stack-md">
+            <div class="card recent-writings-card">
+              <h3>সাম্প্রতিক যুক্ত করা লেখা</h3>
+              <div class="table-container mt-stack-sm">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>শিরোনাম</th>
+                      <th>বিভাগ</th>
+                      <th>তারিখ</th>
+                      <th>ফিচার্ড</th>
+                      <th>অ্যাকশন</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentWritingsList">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. WRITINGS LIST TAB -->
+        <section id="tab-writings" class="tab-content">
+          <div class="table-actions">
+            <div class="search-box">
+              <span class="material-symbols-outlined">search</span>
+              <input type="text" id="searchWritings" placeholder="লেখা খুঁজুন...">
+            </div>
+            <div class="filter-controls">
+              <select id="filterCategory">
+                <option value="all">সব ক্যাটাগরি</option>
+                <option value="poem">কবিতা</option>
+                <option value="rhyme">ছড়া</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card mt-stack-sm">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>আইডি</th>
+                    <th>শিরোনাম</th>
+                    <th>ক্যাটাগরি</th>
+                    <th>তারিখ</th>
+                    <th>ফিচার্ড</th>
+                    <th>অ্যাকশন</th>
+                  </tr>
+                </thead>
+                <tbody id="allWritingsList">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. WRITING EDITOR TAB -->
+        <section id="tab-editor" class="tab-content">
+          <div class="editor-layout">
+            <!-- Form panel -->
+            <div class="card editor-form-card">
+              <h3 id="editorFormTitle">নতুন রচনা তৈরি করুন</h3>
+              <form id="writingForm" class="mt-stack-sm">
+                <input type="hidden" id="editId">
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label for="wTitle" class="form-label">রচনার শিরোনাম</label>
+                    <input type="text" id="wTitle" class="input-minimalist" required placeholder="উদাঃ পাহাড়ি ঝর্ণা">
+                  </div>
+                  <div class="form-group" style="width: 180px;">
+                    <label for="wCategory" class="form-label">ক্যাটাগরি</label>
+                    <select id="wCategory" class="input-minimalist" required>
+                      <option value="poem">কবিতা</option>
+                      <option value="rhyme">ছড়া</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label for="wDate" class="form-label">তারিখ</label>
+                    <input type="text" id="wDate" class="input-minimalist" placeholder="উদাঃ ১৭/০৯/২০১৪ বা তারিখ অজানা">
+                  </div>
+                  <div class="form-group" style="width: 180px;">
+                    <label for="wReadTime" class="form-label">পঠন সময়</label>
+                    <input type="text" id="wReadTime" class="input-minimalist" placeholder="উদাঃ 2 মিনিট পাঠ">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="wExcerpt" class="form-label">সংক্ষিপ্ত অংশ (Excerpt) — হোম পেজে দেখানোর জন্য</label>
+                  <input type="text" id="wExcerpt" class="input-minimalist" placeholder="কবিতা বা গল্পের প্রথম দু-এক লাইনের খসড়া...">
+                </div>
+
+                <div class="form-group">
+                  <div class="flex items-center justify-between">
+                    <label for="wContent" class="form-label">রচনার বিবরণ / স্তবকসমূহ</label>
+                    <span class="label-hint">স্তবক আলাদা করতে একটি ফাকা লাইন ব্যবহার করুন</span>
+                  </div>
+                  <textarea id="wContent" class="input-minimalist editor-textarea" required placeholder="ভাত্তুন্ অলাক্ হগরা,&#10;খে লগই য' থরা থরা,&#10;&#10;পত্থান্ অইয়ে দুরোদুরি,&#10;সিত্তুন্ আর' মুড়োমুড়ি..."></textarea>
+                </div>
+
+                <div class="form-row form-checkbox-row">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="wFeatured">
+                    <span class="checkmark"></span>
+                    হোমপেজে ফিচার্ড স্টোরি হিসেবে দেখান (অন্য সব ফিচার্ড বন্ধ হয়ে যাবে)
+                  </label>
+                </div>
+
+                <div class="form-buttons mt-stack-sm">
+                  <button type="submit" class="btn-primary" id="saveBtn">সংরক্ষণ করুন</button>
+                  <button type="button" class="btn-secondary" id="cancelBtn">বাতিল করুন</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Preview panel -->
+            <div class="card preview-card">
+              <h3>লাইভ প্রিভিউ</h3>
+              <div class="preview-output-container mt-stack-sm">
+                <div class="preview-well" id="livePreviewContainer">
+                  <div class="text-center">
+                    <p class="text-muted">ফর্ম পূরণ শুরু করুন প্রিভিউ দেখার জন্য...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. EXPORT CODE TAB -->
+        <section id="tab-export" class="tab-content">
+          <div class="card text-column">
+            <h3>কোড ডিস্ট্রিবিউশন এবং গিটহাব ইন্টিগ্রেশন</h3>
+            <p class="mt-stack-xs">আপনি ড্যাশবোর্ডে যে পরিবর্তনগুলো করেছেন তা এই ব্রাউজারে লোকাল স্টোরেজে সংরক্ষণ করা হয়েছে। আপনার ওয়েবসাইটকে গিটহাব এবং ভার্সেলে আপডেট করতে হলে নিচের ফাইলটি ডাউনলোড করে আপনার লোকাল রিপোজিটরিতে `app.js` এর জায়গায় পরিবর্তন করে পুশ করুন।</p>
+            
+            <div class="download-section mt-stack-md">
+              <button id="downloadAppJs" class="btn-primary">
+                <span class="material-symbols-outlined">download</span> app.js ডাউনলোড করুন
+              </button>
+              <button id="copyAppJs" class="btn-secondary">
+                <span class="material-symbols-outlined">content_copy</span> ক্লিপবোর্ডে কপি করুন
+              </button>
+            </div>
+
+            <div class="instructions mt-stack-md">
+              <h4>কিভাবে কোড আপডেট করবেন (GitHub CLI ও Vercel):</h4>
+              <ol class="step-list">
+                <li>
+                  <strong>ফাইল প্রতিস্থাপন:</strong> আপনার ড্যাশবোর্ডের ডিরেক্টরিতে ডাউনলোড করা <code>app.js</code> ফাইলটি দিয়ে আগের ফাইলটি প্রতিস্থাপন করুন।
+                </li>
+                <li>
+                  <strong>টার্মিনালে কমান্ড রান করুন:</strong>
+                  <pre class="code-block">git add app.js
+git commit -m "Update writings from admin panel"
+git push</pre>
+                </li>
+                <li>
+                  <strong>স্বয়ংক্রিয় ডিপ্লয়মেন্ট:</strong> কোড পুশ হওয়ার পর Vercel স্বয়ংক্রিয়ভাবে নতুন চেঞ্জগুলো নিয়ে লাইভ ওয়েবসাইট আপডেট করে দেবে।
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Admin Script -->
+  <script src="admin.js"></script>
+</body>
+</html>

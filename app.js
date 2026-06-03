@@ -4,7 +4,7 @@
 // ----------------------------------------------------
 
 // 1. Database of Literary Works (All content in Bengali)
-const writings = [
+let writings = [
   {
     "id": "poem-01",
     "title": "জুম হাবা",
@@ -2879,6 +2879,15 @@ const writings = [
     ]
   }
 ];
+
+// Check if localStorage has updated writings
+if (localStorage.getItem("granthagor_writings")) {
+  try {
+    writings = JSON.parse(localStorage.getItem("granthagor_writings"));
+  } catch (e) {
+    console.error("Error loading writings from localStorage:", e);
+  }
+}
 
 // 2. Application State
 const state = {
