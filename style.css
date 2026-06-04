@@ -953,6 +953,7 @@ body.poem-reader-active .reader-content p.poem-line {
   padding-left: 24px;
   margin: 40px 0;
   color: var(--on-surface-variant);
+  white-space: pre-line;
 }
 
 /* Bio Section (About Page) */
