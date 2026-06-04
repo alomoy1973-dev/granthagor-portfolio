@@ -4668,10 +4668,75 @@ function toBengaliNumber(num) {
   return String(num).split('').map(char => mapping[char] || char).join('');
 }
 
+// Generate pagination HTML structure
+function generatePaginationHtml(currentPage, totalPages, type) {
+  let html = `<div class="pagination-container">`;
+  
+  const prevDisabled = currentPage === 1 ? 'disabled' : '';
+  html += `
+    <button class="page-btn page-btn-prev" ${prevDisabled} data-type="${type}" data-page="${currentPage - 1}">
+      <span class="material-symbols-outlined" style="font-size: 16px;">chevron_left</span>
+      পূর্ববর্তী
+    </button>
+  `;
+  
+  for (let i = 1; i <= totalPages; i++) {
+    const activeClass = currentPage === i ? 'active' : '';
+    html += `
+      <button class="page-btn page-btn-num ${activeClass}" data-type="${type}" data-page="${i}">
+        ${toBengaliNumber(i)}
+      </button>
+    `;
+  }
+  
+  const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+  html += `
+    <button class="page-btn page-btn-next" ${nextDisabled} data-type="${type}" data-page="${currentPage + 1}">
+      পরবর্তী
+      <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span>
+    </button>
+  `;
+  
+  html += `</div>`;
+  return html;
+}
+
+// Bind pagination click events and handle smooth-scroll
+function bindPaginationEvents(paginationContainer, type, sectionHeaderSelector) {
+  if (!paginationContainer) return;
+  const buttons = paginationContainer.querySelectorAll(".page-btn");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (btn.disabled || btn.hasAttribute("disabled")) return;
+      const page = parseInt(btn.getAttribute("data-page"), 10);
+      if (isNaN(page)) return;
+      
+      if (type === 'poem') {
+        state.poemPage = page;
+      } else if (type === 'rhyme') {
+        state.rhymePage = page;
+      } else if (type === 'story') {
+        state.storyPage = page;
+      }
+      
+      renderContent();
+      
+      const section = document.querySelector(sectionHeaderSelector);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+}
+
 const state = {
   currentPage: "home", // "home", "about", "reader"
   currentCategory: "all", // "all", "poem", "rhyme"
-  currentReadingId: null
+  currentReadingId: null,
+  poemPage: 1,
+  rhymePage: 1,
+  storyPage: 1
 };
 
 // 3. Elements Selector Cache
@@ -4687,10 +4752,13 @@ const elements = {
   featuredContainer: document.getElementById("featuredContainer"),
   poetrySection: document.getElementById("poetrySection"),
   poetryContainer: document.getElementById("poetryContainer"),
+  poetryPagination: document.getElementById("poetryPagination"),
   rhymesSection: document.getElementById("rhymesSection"),
   rhymesContainer: document.getElementById("rhymesContainer"),
+  rhymesPagination: document.getElementById("rhymesPagination"),
   storiesSection: document.getElementById("storiesSection"),
   storiesContainer: document.getElementById("storiesContainer"),
+  storiesPagination: document.getElementById("storiesPagination"),
   
   // Filter tabs
   filterTabs: document.querySelectorAll(".filter-tab"),
@@ -4923,6 +4991,9 @@ function setupFilters() {
       tab.classList.add("active");
       
       state.currentCategory = tab.getAttribute("data-category");
+      state.poemPage = 1;
+      state.rhymePage = 1;
+      state.storyPage = 1;
       renderContent();
     });
   });
@@ -5070,10 +5141,19 @@ function renderContent() {
   const poems = filtered.filter(w => w.category === "poem");
   if (poems.length > 0) {
     elements.poetrySection.style.display = "block";
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(poems.length / itemsPerPage);
+    if (state.poemPage > totalPages) state.poemPage = totalPages;
+    if (state.poemPage < 1) state.poemPage = 1;
+    
+    const startIndex = (state.poemPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedPoems = poems.slice(startIndex, endIndex);
+    
     let poemsHtml = "";
     const allPoems = writings.filter(w => w.category === "poem");
     
-    poems.forEach(poem => {
+    paginatedPoems.forEach(poem => {
       const pIdx = allPoems.findIndex(p => p.id === poem.id);
       const serialNum = toBengaliNumber(pIdx + 1);
       poemsHtml += `
@@ -5090,6 +5170,14 @@ function renderContent() {
     
     elements.poetryContainer.innerHTML = poemsHtml;
     
+    // Render pagination
+    if (totalPages > 1) {
+      elements.poetryPagination.innerHTML = generatePaginationHtml(state.poemPage, totalPages, 'poem');
+      bindPaginationEvents(elements.poetryPagination, 'poem', '#poetrySection');
+    } else {
+      elements.poetryPagination.innerHTML = "";
+    }
+    
     // Bind click events to poetry articles
     elements.poetryContainer.querySelectorAll(".poetry-item").forEach(item => {
       const id = item.getAttribute("data-id");
@@ -5101,16 +5189,26 @@ function renderContent() {
     });
   } else {
     elements.poetrySection.style.display = "none";
+    elements.poetryPagination.innerHTML = "";
   }
   
   // C. Render Rhymes Section
   const rhymes = filtered.filter(w => w.category === "rhyme");
   if (rhymes.length > 0) {
     elements.rhymesSection.style.display = "block";
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(rhymes.length / itemsPerPage);
+    if (state.rhymePage > totalPages) state.rhymePage = totalPages;
+    if (state.rhymePage < 1) state.rhymePage = 1;
+    
+    const startIndex = (state.rhymePage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedRhymes = rhymes.slice(startIndex, endIndex);
+    
     let rhymesHtml = "";
     const allRhymes = writings.filter(w => w.category === "rhyme");
     
-    rhymes.forEach(rhyme => {
+    paginatedRhymes.forEach(rhyme => {
       const rIdx = allRhymes.findIndex(r => r.id === rhyme.id);
       const serialNum = toBengaliNumber(rIdx + 1);
       rhymesHtml += `
@@ -5127,6 +5225,14 @@ function renderContent() {
     
     elements.rhymesContainer.innerHTML = rhymesHtml;
     
+    // Render pagination
+    if (totalPages > 1) {
+      elements.rhymesPagination.innerHTML = generatePaginationHtml(state.rhymePage, totalPages, 'rhyme');
+      bindPaginationEvents(elements.rhymesPagination, 'rhyme', '#rhymesSection');
+    } else {
+      elements.rhymesPagination.innerHTML = "";
+    }
+    
     // Bind click events to rhymes articles
     elements.rhymesContainer.querySelectorAll(".poetry-item").forEach(item => {
       const id = item.getAttribute("data-id");
@@ -5138,16 +5244,26 @@ function renderContent() {
     });
   } else {
     elements.rhymesSection.style.display = "none";
+    elements.rhymesPagination.innerHTML = "";
   }
 
   // D. Render Stories Section
   const stories = filtered.filter(w => w.category === "story" && !w.isFeatured);
   if (stories.length > 0) {
     elements.storiesSection.style.display = "block";
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(stories.length / itemsPerPage);
+    if (state.storyPage > totalPages) state.storyPage = totalPages;
+    if (state.storyPage < 1) state.storyPage = 1;
+    
+    const startIndex = (state.storyPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedStories = stories.slice(startIndex, endIndex);
+    
     let storiesHtml = "";
     const allStories = writings.filter(w => w.category === "story");
     
-    stories.forEach(story => {
+    paginatedStories.forEach(story => {
       const sIdx = allStories.findIndex(s => s.id === story.id);
       const serialNum = toBengaliNumber(sIdx + 1);
       storiesHtml += `
@@ -5169,6 +5285,14 @@ function renderContent() {
     
     elements.storiesContainer.innerHTML = storiesHtml;
     
+    // Render pagination
+    if (totalPages > 1) {
+      elements.storiesPagination.innerHTML = generatePaginationHtml(state.storyPage, totalPages, 'story');
+      bindPaginationEvents(elements.storiesPagination, 'story', '#storiesSection');
+    } else {
+      elements.storiesPagination.innerHTML = "";
+    }
+    
     // Bind click events to stories cards
     elements.storiesContainer.querySelectorAll(".writing-card").forEach(card => {
       const id = card.getAttribute("data-id");
@@ -5179,6 +5303,7 @@ function renderContent() {
     });
   } else {
     elements.storiesSection.style.display = "none";
+    elements.storiesPagination.innerHTML = "";
   }
 }
 

@@ -1189,3 +1189,79 @@ footer {
     padding: 32px;
   }
 }
+
+/* ----------------------------------------------------
+   Pagination Components (Sharp Editorial Style)
+   ---------------------------------------------------- */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--outline-variant);
+  width: 100%;
+}
+
+.page-btn {
+  background: transparent;
+  border: 1px solid var(--outline-variant);
+  color: var(--secondary);
+  font-family: var(--font-label);
+  font-size: 13px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--transition-easing);
+  border-radius: 0 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-btn:hover {
+  background-color: var(--surface-container-low);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.page-btn.active {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--outline-variant);
+  color: var(--outline);
+  background: transparent;
+}
+
+.page-btn-num {
+  padding: 8px 12px;
+  min-width: 35px;
+  justify-content: center;
+}
+
+/* Mobile responsive pagination */
+@media (max-width: 480px) {
+  .pagination-container {
+    gap: 4px;
+    margin-top: 32px;
+    padding-top: 16px;
+  }
+  .page-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    gap: 4px;
+  }
+  .page-btn-num {
+    padding: 6px 8px;
+    min-width: 28px;
+  }
+}
+
