@@ -3279,20 +3279,22 @@ function setupFilters() {
 // 9. Forms & Validation Handler
 function setupForms() {
   // Newsletter form submission
-  elements.newsletterForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const emailInput = elements.newsletterForm.querySelector("input[type='email']");
-    const email = emailInput.value.trim();
-    
-    if (email === "") {
-      showToast("দয়া করে একটি সঠিক ইমেইল ঠিকানা দিন।");
-      return;
-    }
-    
-    // Simulate API Call
-    showToast("নিউজলেটারে সফলভাবে সাবস্ক্রাইব করা হয়েছে!");
-    emailInput.value = "";
-  });
+  if (elements.newsletterForm) {
+    elements.newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emailInput = elements.newsletterForm.querySelector("input[type='email']");
+      const email = emailInput.value.trim();
+      
+      if (email === "") {
+        showToast("দয়া করে একটি সঠিক ইমেইল ঠিকানা দিন।");
+        return;
+      }
+      
+      // Simulate API Call
+      showToast("নিউজলেটারে সফলভাবে সাবস্ক্রাইব করা হয়েছে!");
+      emailInput.value = "";
+    });
+  }
   
   // Contact form submission
   elements.contactForm.addEventListener("submit", (e) => {
