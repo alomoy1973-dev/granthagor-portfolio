@@ -820,28 +820,28 @@ textarea.input-minimalist {
   margin-bottom: 32px;
 }
 
-/* Rhyme & Poem Reader Active States (Custom Background Images) */
-body.rhyme-reader-active {
-  background-image: url('rhyme-bg.jpg');
+/* Fixed Background Layer for Reader View (Immersive Mobile Compatible Parallax) */
+.reader-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
-  transition: background 0.3s ease;
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition-speed) var(--transition-easing);
 }
-body.dark.rhyme-reader-active {
+
+body.rhyme-reader-active .reader-bg {
+  display: block;
+  opacity: 1;
   background-image: url('rhyme-bg.jpg');
 }
 
-body.poem-reader-active {
-  background-image: url('poem-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  transition: background 0.3s ease;
-}
-body.dark.poem-reader-active {
+body.poem-reader-active .reader-bg {
+  display: block;
+  opacity: 1;
   background-image: url('poem-bg.jpg');
 }
 
@@ -923,11 +923,10 @@ body.poem-reader-active .reader-content p.poem-line {
 
 /* Mobile Compatibility & Responsiveness Overrides */
 @media (max-width: 768px) {
-  body.rhyme-reader-active,
-  body.poem-reader-active {
-    background-attachment: scroll !important; /* Fixes background image zooming/lag on mobile iOS/Android */
-    background-size: cover;
-    background-position: center top;
+  /* Prevent background zoom-in on mobile by focusing the center top of the fixed layer */
+  body.rhyme-reader-active .reader-bg,
+  body.poem-reader-active .reader-bg {
+    background-position: center top !important;
   }
 
   body.rhyme-reader-active .reader-content p.poem-line,
