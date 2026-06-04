@@ -820,6 +820,45 @@ textarea.input-minimalist {
   margin-bottom: 32px;
 }
 
+/* Rhyme Reader Active State (Custom Background Image) */
+body.rhyme-reader-active {
+  background-image: linear-gradient(to bottom, rgba(250, 249, 245, 0.88) 0%, rgba(250, 249, 245, 0.95) 100%), url('rhyme-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background 0.3s ease;
+}
+
+body.dark.rhyme-reader-active {
+  background-image: linear-gradient(to bottom, rgba(27, 28, 26, 0.88) 0%, rgba(27, 28, 26, 0.95) 100%), url('rhyme-bg.jpg');
+}
+
+/* Semi-transparent sticky header when rhyme reader is active */
+body.rhyme-reader-active header {
+  background-color: rgba(250, 249, 245, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body.dark.rhyme-reader-active header {
+  background-color: rgba(27, 28, 26, 0.8);
+}
+
+/* Enhancing reader content frame for rhyme visual immersion */
+body.rhyme-reader-active .reader-view .reading-well {
+  background-color: rgba(250, 249, 245, 0.4);
+  padding: 40px;
+  border: 1px solid rgba(85, 98, 84, 0.15); /* matching --secondary color tint */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+body.dark.rhyme-reader-active .reader-view .reading-well {
+  background-color: rgba(27, 28, 26, 0.4);
+  border-color: rgba(189, 202, 186, 0.15);
+}
+
 /* Blockquotes */
 .block-quote {
   font-family: var(--font-body);

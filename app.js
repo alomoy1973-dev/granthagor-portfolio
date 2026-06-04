@@ -3074,6 +3074,9 @@ function switchPage(pageId) {
   state.currentPage = pageId;
   state.currentReadingId = null;
   
+  // Clean up rhyme reader background class if navigating away
+  elements.body.classList.remove("rhyme-reader-active");
+  
   // Update active state in navigation links
   elements.navLinks.forEach(link => {
     const pageTarget = link.getAttribute("data-page");
@@ -3105,6 +3108,13 @@ function openReaderView(articleId) {
   
   state.currentPage = "reader";
   state.currentReadingId = articleId;
+  
+  // Toggle background image for rhyme full view
+  if (article.category === "rhyme") {
+    elements.body.classList.add("rhyme-reader-active");
+  } else {
+    elements.body.classList.remove("rhyme-reader-active");
+  }
   
   // Render details inside reader
   let contentHtml = "";
