@@ -289,7 +289,6 @@ nav {
   height: 38px;
   width: 38px;
   border-radius: 50%;
-  border: 1.5px solid var(--primary);
   background-color: #fff;
   overflow: hidden;
   display: flex;
@@ -301,12 +300,8 @@ nav {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  transform: scale(1.5);
+  transform: scale(1.85);
   transition: all 0.3s ease;
-}
-
-body.dark .logo-img-wrapper {
-  border-color: var(--primary);
 }
 
 body.dark .logo-img {
