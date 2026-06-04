@@ -280,6 +280,24 @@ nav {
   font-weight: 600;
   color: var(--primary);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 38px;
+  width: 38px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+body.dark .logo-img {
+  border-color: var(--primary);
+  filter: brightness(0.95);
 }
 
 .nav-links {
