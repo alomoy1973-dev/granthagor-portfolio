@@ -2988,17 +2988,13 @@ if (localStorage.getItem("granthagor_writings")) {
 const state = {
   currentPage: "home", // "home", "about", "reader"
   currentCategory: "all", // "all", "poem", "rhyme"
-  currentReadingId: null,
-  theme: "light"
+  currentReadingId: null
 };
 
 // 3. Elements Selector Cache
 const elements = {
   body: document.body,
   navLinks: document.querySelectorAll(".nav-link"),
-  themeToggle: document.getElementById("themeToggle"),
-  themeIcon: document.getElementById("themeIcon"),
-  
   // Views
   homeView: document.getElementById("homeView"),
   aboutView: document.getElementById("aboutView"),
@@ -3036,45 +3032,13 @@ const elements = {
 
 // 4. Initialize Function
 function init() {
-  setupTheme();
   setupNavigation();
   setupFilters();
   setupForms();
   renderContent();
 }
 
-// 5. Theme Settings (Light/Dark Mode)
-function setupTheme() {
-  const savedTheme = localStorage.getItem("theme");
-  
-  if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-    state.theme = "dark";
-    elements.body.classList.add("dark");
-    elements.themeIcon.innerText = "light_mode";
-  } else {
-    state.theme = "light";
-    elements.body.classList.remove("dark");
-    elements.themeIcon.innerText = "dark_mode";
-  }
-  
-  elements.themeToggle.addEventListener("click", () => {
-    if (state.theme === "light") {
-      state.theme = "dark";
-      elements.body.classList.add("dark");
-      elements.themeIcon.innerText = "light_mode";
-      localStorage.setItem("theme", "dark");
-      showToast("ডার্ক মোড সক্রিয় করা হয়েছে");
-    } else {
-      state.theme = "light";
-      elements.body.classList.remove("dark");
-      elements.themeIcon.innerText = "dark_mode";
-      localStorage.setItem("theme", "light");
-      showToast("লাইট মোড সক্রিয় করা হয়েছে");
-    }
-  });
-}
-
-// 6. Navigation Router (SPA Style Transitions)
+// 5. Navigation Router (SPA Style Transitions)
 function setupNavigation() {
   elements.navLinks.forEach(link => {
     link.addEventListener("click", (e) => {

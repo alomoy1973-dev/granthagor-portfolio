@@ -81,50 +81,6 @@
   --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Dark Mode Overrides */
-body.dark {
-  --background: #1b1c1a;
-  --on-background: #faf9f5;
-  
-  --surface: #1b1c1a;
-  --surface-dim: #121312;
-  --surface-bright: #2d2d2d;
-  --surface-container-lowest: #101110;
-  --surface-container-low: #202120;
-  --surface-container: #262726;
-  --surface-container-high: #313331;
-  --surface-container-highest: #3b3d3b;
-  
-  --on-surface: #f2f1ed;
-  --on-surface-variant: #c4c7c7;
-  --inverse-surface: #faf9f5;
-  --inverse-on-surface: #1b1c1a;
-  --outline: #959494;
-  --outline-variant: #444748;
-  --surface-tint: #c8c6c6;
-
-  --primary: #faf9f5;
-  --on-primary: #181919;
-  --primary-container: #3d3d3d;
-  --on-primary-container: #c8c6c6;
-  --inverse-primary: #181919;
-
-  --secondary: #bdcaba;
-  --on-secondary: #131e14;
-  --secondary-container: #3e4a3d;
-  --on-secondary-container: #d9e6d5;
-
-  --tertiary: #b6c9d8;
-  --on-tertiary: #0a1e28;
-  --tertiary-container: #374955;
-  --on-tertiary-container: #d2e5f4;
-
-  --error: #ffb4ab;
-  --on-error: #690005;
-  --error-container: #93000a;
-  --on-error-container: #ffdad6;
-}
-
 /* Base Styles */
 * {
   box-sizing: border-box;
@@ -304,10 +260,6 @@ nav {
   transition: all 0.3s ease;
 }
 
-body.dark .logo-img {
-  filter: brightness(0.95);
-}
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -341,23 +293,6 @@ body.dark .logo-img {
   display: inline-block;
   vertical-align: middle;
   line-height: 1;
-}
-
-/* Theme Toggle Button */
-.theme-toggle-btn {
-  background: none;
-  border: none;
-  color: var(--secondary);
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-}
-
-.theme-toggle-btn:hover {
-  color: var(--primary);
 }
 
 /* Sharp Buttons */
@@ -487,10 +422,6 @@ button, .btn {
   background-color: var(--surface-container);
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(27, 28, 26, 0.04);
-}
-
-body.dark .writing-card:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
 .mood-card {
@@ -874,18 +805,13 @@ body.poem-reader-active .reader-bg {
 /* Immersive semi-transparent sticky header in rhyme/poem mode */
 body.rhyme-reader-active header,
 body.poem-reader-active header {
-  background-color: rgba(27, 28, 26, 0.15); /* dark tinted transparent header */
+  background-color: rgba(27, 28, 26, 0.15); /* tinted transparent header */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-body.dark.rhyme-reader-active header,
-body.dark.poem-reader-active header {
-  background-color: rgba(27, 28, 26, 0.25);
-}
-
-/* Adjust header link contrast for dark theme active state */
+/* Adjust header link contrast for immersive reader state */
 body.rhyme-reader-active header a.nav-link,
 body.rhyme-reader-active header a.logo,
 body.poem-reader-active header a.nav-link,
@@ -1040,10 +966,6 @@ body.poem-reader-active .reader-content p.poem-line {
   justify-content: space-between;
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-body.dark .modal-overlay {
-  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-header {
