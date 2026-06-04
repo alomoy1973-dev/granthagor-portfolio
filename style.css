@@ -285,18 +285,31 @@ nav {
   gap: 12px;
 }
 
-.logo-img {
+.logo-img-wrapper {
   height: 38px;
   width: 38px;
-  object-fit: cover;
   border-radius: 50%;
   border: 1.5px solid var(--primary);
   background-color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transform: scale(1.5);
   transition: all 0.3s ease;
 }
 
-body.dark .logo-img {
+body.dark .logo-img-wrapper {
   border-color: var(--primary);
+}
+
+body.dark .logo-img {
   filter: brightness(0.95);
 }
 
