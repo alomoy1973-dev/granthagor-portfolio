@@ -820,7 +820,7 @@ textarea.input-minimalist {
   margin-bottom: 32px;
 }
 
-/* Rhyme Reader Active State (Custom Background Image) */
+/* Rhyme & Poem Reader Active States (Custom Background Images) */
 body.rhyme-reader-active {
   background-image: url('rhyme-bg.jpg');
   background-size: cover;
@@ -829,40 +829,59 @@ body.rhyme-reader-active {
   background-repeat: no-repeat;
   transition: background 0.3s ease;
 }
-
 body.dark.rhyme-reader-active {
   background-image: url('rhyme-bg.jpg');
 }
 
-/* Immersive semi-transparent sticky header in rhyme mode */
-body.rhyme-reader-active header {
+body.poem-reader-active {
+  background-image: url('poem-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background 0.3s ease;
+}
+body.dark.poem-reader-active {
+  background-image: url('poem-bg.jpg');
+}
+
+/* Immersive semi-transparent sticky header in rhyme/poem mode */
+body.rhyme-reader-active header,
+body.poem-reader-active header {
   background-color: rgba(27, 28, 26, 0.15); /* dark tinted transparent header */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-body.dark.rhyme-reader-active header {
+body.dark.rhyme-reader-active header,
+body.dark.poem-reader-active header {
   background-color: rgba(27, 28, 26, 0.25);
 }
 
 /* Adjust header link contrast for dark theme active state */
 body.rhyme-reader-active header a.nav-link,
-body.rhyme-reader-active header a.logo {
+body.rhyme-reader-active header a.logo,
+body.poem-reader-active header a.nav-link,
+body.poem-reader-active header a.logo {
   color: #faf9f5 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 body.rhyme-reader-active header a.nav-link:hover,
-body.rhyme-reader-active header a.nav-link.active {
+body.rhyme-reader-active header a.nav-link.active,
+body.poem-reader-active header a.nav-link:hover,
+body.poem-reader-active header a.nav-link.active {
   color: #bdcaba !important;
 }
-body.rhyme-reader-active header .btn-primary {
+body.rhyme-reader-active header .btn-primary,
+body.poem-reader-active header .btn-primary {
   background-color: #faf9f5 !important;
   color: #1b1c1a !important;
 }
 
 /* Write text directly on the image - no section card division */
-body.rhyme-reader-active .reader-view .reading-well {
+body.rhyme-reader-active .reader-view .reading-well,
+body.poem-reader-active .reader-view .reading-well {
   background-color: transparent !important;
   padding: 0 !important;
   border: none !important;
@@ -872,29 +891,58 @@ body.rhyme-reader-active .reader-view .reading-well {
 }
 
 /* Themed text adjustments with drop shadow for premium overlay look */
-body.rhyme-reader-active .reader-view .reader-back {
+body.rhyme-reader-active .reader-view .reader-back,
+body.poem-reader-active .reader-view .reader-back {
   color: #faf9f5 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
-body.rhyme-reader-active .reader-view .reader-back:hover {
+body.rhyme-reader-active .reader-view .reader-back:hover,
+body.poem-reader-active .reader-view .reader-back:hover {
   color: #bdcaba !important;
 }
 
-body.rhyme-reader-active .reader-header h1.headline-lg {
+body.rhyme-reader-active .reader-header h1.headline-lg,
+body.poem-reader-active .reader-header h1.headline-lg {
   color: #faf9f5 !important;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-body.rhyme-reader-active .reader-meta {
+body.rhyme-reader-active .reader-meta,
+body.poem-reader-active .reader-meta {
   color: #dbdad6 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-body.rhyme-reader-active .reader-content p.poem-line {
+body.rhyme-reader-active .reader-content p.poem-line,
+body.poem-reader-active .reader-content p.poem-line {
   color: #faf9f5 !important;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.5);
   font-size: 22px;
   font-weight: 500;
+}
+
+/* Mobile Compatibility & Responsiveness Overrides */
+@media (max-width: 768px) {
+  body.rhyme-reader-active,
+  body.poem-reader-active {
+    background-attachment: scroll !important; /* Fixes background image zooming/lag on mobile iOS/Android */
+    background-size: cover;
+    background-position: center top;
+  }
+
+  body.rhyme-reader-active .reader-content p.poem-line,
+  body.poem-reader-active .reader-content p.poem-line {
+    font-size: 17px !important; /* Avoid word wrapping to keep poem line rhythm */
+    line-height: 1.5;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  body.rhyme-reader-active .reader-header h1.headline-lg,
+  body.poem-reader-active .reader-header h1.headline-lg {
+    font-size: 28px !important;
+    line-height: 1.3;
+  }
 }
 
 /* Blockquotes */
@@ -1119,11 +1167,19 @@ footer {
   }
   
   nav {
-    height: 64px;
+    flex-direction: column;
+    height: auto;
+    padding: 12px 0;
+    gap: 8px;
   }
   
   .nav-links {
-    display: none; /* Collapsed on mobile, menu handled by toggle button */
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
   }
   
   .headline-lg { font-size: 32px; }

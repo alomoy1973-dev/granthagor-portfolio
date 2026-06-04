@@ -3074,8 +3074,9 @@ function switchPage(pageId) {
   state.currentPage = pageId;
   state.currentReadingId = null;
   
-  // Clean up rhyme reader background class if navigating away
+  // Clean up reader background classes if navigating away
   elements.body.classList.remove("rhyme-reader-active");
+  elements.body.classList.remove("poem-reader-active");
   
   // Update active state in navigation links
   elements.navLinks.forEach(link => {
@@ -3109,11 +3110,16 @@ function openReaderView(articleId) {
   state.currentPage = "reader";
   state.currentReadingId = articleId;
   
-  // Toggle background image for rhyme full view
+  // Toggle background image for rhyme / poem full view
   if (article.category === "rhyme") {
     elements.body.classList.add("rhyme-reader-active");
+    elements.body.classList.remove("poem-reader-active");
+  } else if (article.category === "poem") {
+    elements.body.classList.add("poem-reader-active");
+    elements.body.classList.remove("rhyme-reader-active");
   } else {
     elements.body.classList.remove("rhyme-reader-active");
+    elements.body.classList.remove("poem-reader-active");
   }
   
   // Render details inside reader
