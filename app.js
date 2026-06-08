@@ -7990,10 +7990,10 @@ let writings = [
     "id": "song-171",
     "title": "মদ্হেলে, হেব' সমারে",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "মদ্হেলে, হেব' সমারে",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "মদ্হেলে, হেব' সমারে,",
@@ -8038,10 +8038,10 @@ let writings = [
     "id": "song-172",
     "title": "ঠেঙাঁভাঙাঁগীত্",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "১. জীদুদাগীরেন' দেঘঙ্চিক্কো, যিয়ন্কনকামত্",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "১. জীদুদাগীরেন' দেঘঙ্চিক্কো, যিয়ন্কনকামত্?",
@@ -8092,10 +8092,10 @@ let writings = [
     "id": "song-173",
     "title": "দোলবী",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "এগাহরাদোল্দেঘং, লাজাংলাজাং",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "এগাহরাদোল্দেঘং, লাজাংলাজাং,",
@@ -8131,10 +8131,10 @@ let writings = [
     "id": "song-174",
     "title": "ঠেঙাঁভাঙাঁগীত্ (2)",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "আগ' দিনত্আদামত্তুন্চাগেজধায়রাজমোনোত্জুম্হান্দোই।একধুজিজুম, ডাগিলের' পাপি, গেলেভালোদ্দুর।সুদিনমাধান্এ...",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "আগ' দিনত্আদামত্তুন্চাগেজধায়রাজমোনোত্জুম্হান্দোই।একধুজিজুম, ডাগিলের' পাপি, গেলেভালোদ্দুর।সুদিনমাধান্এল'।তোগেলেমাছ - হাঙাঁরারাত্নেই।সেপোইদানেইক্কোগাবুজ্যে-গাবুরিরজুরপাল \"ঠেঙাঁভাঙাঁ\" গীত। (১) মিলে, (২) মরদ।",
@@ -8209,10 +8209,10 @@ let writings = [
     "id": "song-175",
     "title": "ধাগত্বসছিনাগুরি",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "বাজারত্যাদেছারাদোজ্",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "বাজারত্যাদেছারাদোজ্,",
@@ -8251,10 +8251,10 @@ let writings = [
     "id": "song-176",
     "title": "কঠিনচীবরদানরগীত",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "প্রবারণাপুন্নিমালামি",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "প্রবারণাপুন্নিমালামি",
@@ -8288,10 +8288,10 @@ let writings = [
     "id": "song-177",
     "title": "অদিঞ্যেঁদেবাদরত্পেজালীবাবরইক্কোগান।পেজালীমাআমিজেঘরবেড়ায়",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "..... পেজালীমা! ওপেজালীমাও!",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "..... পেজালীমা! ওপেজালীমাও!",
@@ -8332,10 +8332,10 @@ let writings = [
     "id": "song-178",
     "title": "ইক্কোধর্মীয়সংগীত",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "দজরবলেপূণ্যকাম্ ;",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "দজরবলেপূণ্যকাম্ ;",
@@ -8371,10 +8371,10 @@ let writings = [
     "id": "song-179",
     "title": "( ১.- মরদ্২.-মিলে, ১+২- এগত্তরে)",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "১. ও...ওহালাবে!",
     "date": "25.12.2016",
-    "readTime": "2 ????? ???",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "১. ও...ওহালাবে!",
@@ -8468,10 +8468,10 @@ let writings = [
     "id": "song-180",
     "title": "বিজুরাম",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "ওভেইবি..জু...রা...ম.....",
     "date": "31.12.2016",
-    "readTime": "2 ????? ???",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "ওভেইবি..জু...রা...ম.....",
@@ -8527,10 +8527,10 @@ let writings = [
     "id": "song-181",
     "title": "উজো..উজোওও...হুউউ...হুই..( হিয়াংশিক/রেঙ)",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "\"ডাগিল' বেগরে",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "\"ডাগিল' বেগরে,",
@@ -8576,10 +8576,10 @@ let writings = [
     "id": "song-182",
     "title": "পরানী",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "ন' কানিচ্পরানী; বুকবানযাদিমাদি",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "ন' কানিচ্পরানী; বুকবানযাদিমাদি,",
@@ -8630,10 +8630,10 @@ let writings = [
     "id": "song-183",
     "title": "গাইলে গান, না গাইলে কিছুই না..",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "মনটা যখন বড়ই উদাস বৃষ্টিস্নাত দুপুরে!",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "মনটা যখন বড়ই উদাস বৃষ্টিস্নাত দুপুরে!",
@@ -8679,10 +8679,10 @@ let writings = [
     "id": "song-184",
     "title": "সমবেত সংগীত",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "হুইই......হুই.....",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "হুইই......হুই.....",
@@ -8723,10 +8723,10 @@ let writings = [
     "id": "song-185",
     "title": "ও মর পরানী! ও মর ছুলানী",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "ও মর পরানী! ও মর ছুলানী!",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "ও মর পরানী! ও মর ছুলানী!",
@@ -8769,10 +8769,10 @@ let writings = [
     "id": "song-186",
     "title": "ঠেঙাভাঙা গীত",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "(স্টিকারের মাধ্যমে মেয়ে এবং পুরুষ চিহ্নিত করা হলো। যেহেতু দ্বৈত সংগীত(",
-    "date": "????? ?????",
-    "readTime": "3 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "3 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "(স্টিকারের মাধ্যমে মেয়ে এবং পুরুষ চিহ্নিত করা হলো। যেহেতু দ্বৈত সংগীত(",
@@ -8865,10 +8865,10 @@ let writings = [
     "id": "song-187",
     "title": "নাদংছারা",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "👮 এয়াঞ্যাঁ অবঅ ভিলি হবর পেদুং মোক ন' লোনেই থেদুং। আওজে লোলুংগে পাগল ওনেই। ইক্কে থাহর পাঙর পাগল ওনেই...",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "👮 এয়াঞ্যাঁ অবঅ ভিলি হবর পেদুং মোক ন' লোনেই থেদুং। আওজে লোলুংগে পাগল ওনেই। ইক্কে থাহর পাঙর পাগল ওনেই মোক লনার মর্ম!",
@@ -8926,10 +8926,10 @@ let writings = [
     "id": "song-188",
     "title": "অলিগীত (ঘুমপাড়ানি গান)",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "----চিজিক্কো হক্কে ঘুম যেবে",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "----চিজিক্কো হক্কে ঘুম যেবে??",
@@ -9001,10 +9001,10 @@ let writings = [
     "id": "song-189",
     "title": "( গান? কনফিউজড)",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "নাঙেল' পিদিত তিনান ঘর",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "নাঙেল' পিদিত তিনান ঘর,",
@@ -9048,10 +9048,10 @@ let writings = [
     "id": "song-190",
     "title": "ঠেঙাভাঙা গীত (2)",
     "category": "song",
-    "badge": "???",
+    "badge": "গান",
     "excerpt": "যে গানের বাণী বদলায় সুর বদলায় না সেটি হল' চাঙমাদের ঐতিহ্যবাহী \"ঠেঙাভাঙা\" গীত।",
-    "date": "????? ?????",
-    "readTime": "2 ????? ???",
+    "date": "তারিখ অজানা",
+    "readTime": "2 মিনিট পাঠ",
     "isFeatured": false,
     "content": [
       "যে গানের বাণী বদলায় সুর বদলায় না সেটি হল' চাঙমাদের ঐতিহ্যবাহী \"ঠেঙাভাঙা\" গীত।",
@@ -9647,7 +9647,7 @@ function renderContent() {
   const poems = filtered.filter(w => w.category === "poem");
   if (poems.length > 0) {
     elements.poetrySection.style.display = "block";
-    const itemsPerPage = 10;
+    const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(poems.length / itemsPerPage);
     if (state.poemPage > totalPages) state.poemPage = totalPages;
     if (state.poemPage < 1) state.poemPage = 1;
@@ -9702,7 +9702,7 @@ function renderContent() {
   const rhymes = filtered.filter(w => w.category === "rhyme");
   if (rhymes.length > 0) {
     elements.rhymesSection.style.display = "block";
-    const itemsPerPage = 10;
+    const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(rhymes.length / itemsPerPage);
     if (state.rhymePage > totalPages) state.rhymePage = totalPages;
     if (state.rhymePage < 1) state.rhymePage = 1;
@@ -9757,7 +9757,7 @@ function renderContent() {
   const stories = filtered.filter(w => w.category === "story" && !w.isFeatured);
   if (stories.length > 0) {
     elements.storiesSection.style.display = "block";
-    const itemsPerPage = 10;
+    const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(stories.length / itemsPerPage);
     if (state.storyPage > totalPages) state.storyPage = totalPages;
     if (state.storyPage < 1) state.storyPage = 1;
@@ -9816,7 +9816,7 @@ function renderContent() {
   const songs = filtered.filter(w => w.category === "song");
   if (songs.length > 0) {
     elements.songsSection.style.display = "block";
-    const itemsPerPage = 10;
+    const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(songs.length / itemsPerPage);
     if (state.songPage > totalPages) state.songPage = totalPages;
     if (state.songPage < 1) state.songPage = 1;
@@ -9868,3 +9868,4 @@ function renderContent() {
 
 // Start Application on Load
 document.addEventListener("DOMContentLoaded", init);
+
