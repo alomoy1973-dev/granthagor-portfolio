@@ -8235,6 +8235,7 @@ function switchPage(pageId) {
   // Clean up reader background classes if navigating away
   elements.body.classList.remove("rhyme-reader-active");
   elements.body.classList.remove("poem-reader-active");
+  elements.body.classList.remove("story-reader-active");
   
   // Update active state in navigation links
   elements.navLinks.forEach(link => {
@@ -8277,12 +8278,19 @@ function openReaderView(articleId) {
   if (article.category === "rhyme") {
     elements.body.classList.add("rhyme-reader-active");
     elements.body.classList.remove("poem-reader-active");
+    elements.body.classList.remove("story-reader-active");
   } else if (article.category === "poem") {
     elements.body.classList.add("poem-reader-active");
     elements.body.classList.remove("rhyme-reader-active");
+    elements.body.classList.remove("story-reader-active");
+  } else if (article.category === "story") {
+    elements.body.classList.add("story-reader-active");
+    elements.body.classList.remove("rhyme-reader-active");
+    elements.body.classList.remove("poem-reader-active");
   } else {
     elements.body.classList.remove("rhyme-reader-active");
     elements.body.classList.remove("poem-reader-active");
+    elements.body.classList.remove("story-reader-active");
   }
   
   // Render details inside reader
