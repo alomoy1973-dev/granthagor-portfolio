@@ -605,6 +605,83 @@ button, .btn {
   letter-spacing: 0.05em;
 }
 
+/* PDF Book Collection */
+.pdf-collection-section {
+  border-top: 1px solid var(--outline-variant);
+  padding-top: var(--stack-md);
+}
+
+.pdf-collection-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.pdf-collection-intro .headline-md {
+  margin-top: 8px;
+}
+
+.pdf-book-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pdf-book-card {
+  min-width: 0;
+  background-color: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-speed) var(--transition-easing);
+}
+
+.pdf-book-card:hover {
+  background-color: var(--surface-container);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(27, 28, 26, 0.06);
+}
+
+.pdf-book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--outline-variant);
+  background-color: var(--surface-container);
+}
+
+.pdf-book-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px;
+}
+
+.pdf-book-copy .headline-sm {
+  font-size: 21px;
+}
+
+.pdf-book-copy .body-md {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.pdf-download-btn {
+  width: 100%;
+  margin-top: auto;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.pdf-download-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
 /* Editorial Links */
 .link-editorial {
   font-family: var(--font-label);
@@ -1202,6 +1279,10 @@ footer {
   .col-4 { grid-column: span 12; }
   .mood-card { min-height: 250px; }
   .writing-card { min-height: 320px; }
+
+  .pdf-book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   
   .bio-layout {
     grid-template-columns: 1fr;
@@ -1275,6 +1356,24 @@ footer {
   .stories-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .pdf-collection-intro {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .pdf-book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .pdf-book-copy {
+    padding: 14px;
+  }
+
+  .pdf-book-copy .headline-sm {
+    font-size: 18px;
   }
   
   .newsletter-form {
@@ -1386,6 +1485,22 @@ footer {
   .page-btn-num {
     padding: 6px 8px;
     min-width: 28px;
+  }
+
+  .pdf-book-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-book-card {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+  }
+
+  .pdf-book-cover {
+    height: 100%;
+    aspect-ratio: auto;
+    border-bottom: 0;
+    border-right: 1px solid var(--outline-variant);
   }
 }
 

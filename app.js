@@ -8226,6 +8226,22 @@ function setupNavigation() {
       showToast("ডিজিটাল সংগ্রহশালা আর্কাইভ বর্তমানে বন্ধ রয়েছে।");
     });
   }
+
+  const footerPdfCollectionLink = document.getElementById("footerPdfCollectionLink");
+  if (footerPdfCollectionLink) {
+    footerPdfCollectionLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (state.currentPage !== "home") {
+        switchPage("home");
+      }
+      setTimeout(() => {
+        const pdfSection = document.getElementById("pdfCollectionSection");
+        if (pdfSection) {
+          pdfSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+    });
+  }
 }
 
 function switchPage(pageId) {
