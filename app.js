@@ -9385,6 +9385,7 @@ function switchPage(pageId) {
   elements.body.classList.remove("rhyme-reader-active");
   elements.body.classList.remove("poem-reader-active");
   elements.body.classList.remove("story-reader-active");
+  elements.body.classList.remove("song-reader-active");
   
   // Update active state in navigation links
   elements.navLinks.forEach(link => {
@@ -9423,23 +9424,32 @@ function openReaderView(articleId) {
   const articleIndex = categoryWritings.findIndex(w => w.id === article.id);
   const serialNum = toBengaliNumber(articleIndex + 1);
   
-  // Toggle background image for rhyme / poem full view
+  // Toggle background image for reader categories
   if (article.category === "rhyme") {
     elements.body.classList.add("rhyme-reader-active");
     elements.body.classList.remove("poem-reader-active");
     elements.body.classList.remove("story-reader-active");
+    elements.body.classList.remove("song-reader-active");
   } else if (article.category === "poem") {
     elements.body.classList.add("poem-reader-active");
     elements.body.classList.remove("rhyme-reader-active");
     elements.body.classList.remove("story-reader-active");
+    elements.body.classList.remove("song-reader-active");
   } else if (article.category === "story") {
     elements.body.classList.add("story-reader-active");
     elements.body.classList.remove("rhyme-reader-active");
     elements.body.classList.remove("poem-reader-active");
+    elements.body.classList.remove("song-reader-active");
+  } else if (article.category === "song") {
+    elements.body.classList.add("song-reader-active");
+    elements.body.classList.remove("rhyme-reader-active");
+    elements.body.classList.remove("poem-reader-active");
+    elements.body.classList.remove("story-reader-active");
   } else {
     elements.body.classList.remove("rhyme-reader-active");
     elements.body.classList.remove("poem-reader-active");
     elements.body.classList.remove("story-reader-active");
+    elements.body.classList.remove("song-reader-active");
   }
   
   // Render details inside reader
