@@ -3,13 +3,86 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>গ্রন্থাগার | আলোময় চাকমা</title>
-  
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — কবিতা, ছোটগল্প এবং গভীর ভাবনার এক ডিজিটাল সংগ্রহশালা।">
+
+  <!-- ─── Primary SEO ─── -->
+  <title id="pageTitle">গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার</title>
+  <meta name="description" id="pageDesc" content="আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গান এবং গভীর জীবনানুভূতির এক ডিজিটাল সংগ্রহশালা।">
+  <meta name="keywords" content="আলোময় চাকমা, গ্রন্থাগার, চাঙমা সাহিত্য, বাংলা সাহিত্য, কবিতা, ছড়া, ছোটগল্প, গান, পার্বত্য চট্টগ্রাম, চাঙমা ভাষা">
   <meta name="author" content="আলোময় চাকমা">
-  <meta name="keywords" content="আলোময় চাকমা, গ্রন্থাগার, বাংলা সাহিত্য, কবিতা, ছোটগল্প, পার্বত্য চট্টগ্রাম">
-  
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Bengali">
+  <link rel="canonical" href="https://alomoy.vercel.app/" id="canonicalUrl">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <!-- ─── Open Graph (Facebook / WhatsApp / LinkedIn) ─── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="গ্রন্থাগার — আলোময় চাকমা">
+  <meta property="og:title" id="ogTitle" content="গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার">
+  <meta property="og:description" id="ogDesc" content="আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গানের ডিজিটাল সংগ্রহ।">
+  <meta property="og:url" id="ogUrl" content="https://alomoy.vercel.app/">
+  <meta property="og:image" content="https://alomoy.vercel.app/logo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="bn_BD">
+
+  <!-- ─── Twitter / X Card ─── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@alomoy">
+  <meta name="twitter:title" id="twTitle" content="গ্রন্থাগার | আলোময় চাকমা">
+  <meta name="twitter:description" id="twDesc" content="চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গানের ডিজিটাল সংগ্রহ।">
+  <meta name="twitter:image" content="https://alomoy.vercel.app/logo.png">
+
+  <!-- ─── JSON-LD Structured Data ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://alomoy.vercel.app/#author",
+        "name": "আলোময় চাকমা",
+        "alternateName": "Alomoy Chakma",
+        "description": "চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত কবিতা, ছড়া, গল্প ও গানের রচয়িতা।",
+        "email": "alomoyc6@gmail.com",
+        "url": "https://alomoy.vercel.app/",
+        "image": "https://alomoy.vercel.app/writer.png",
+        "sameAs": [
+          "https://www.facebook.com/share/18bFgu3zzu/"
+        ],
+        "knowsLanguage": ["bn", "চাঙমা"],
+        "jobTitle": "কবি ও কথাসাহিত্যিক",
+        "nationality": {
+          "@type": "Country",
+          "name": "Bangladesh"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://alomoy.vercel.app/#website",
+        "name": "গ্রন্থাগার — আলোময় চাকমা",
+        "url": "https://alomoy.vercel.app/",
+        "description": "চাঙমা সাহিত্য সম্ভার — আলোময় চাকমার সাহিত্যিক পোর্টফোলিও",
+        "inLanguage": "bn",
+        "author": { "@id": "https://alomoy.vercel.app/#author" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://alomoy.vercel.app/#category/{search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://alomoy.vercel.app/#collection",
+        "name": "চাঙমা সাহিত্য সম্ভার",
+        "url": "https://alomoy.vercel.app/",
+        "description": "আলোময় চাকমার সমস্ত কবিতা, ছড়া, ছোটগল্প ও গানের ডিজিটাল সংগ্রহ",
+        "author": { "@id": "https://alomoy.vercel.app/#author" },
+        "inLanguage": "bn"
+      }
+    ]
+  }
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
