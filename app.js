@@ -9262,12 +9262,200 @@ const elements = {
   toastContainer: document.getElementById("toastContainer")
 };
 
+// ─── SEO Constants ───
+const SITE_URL = "https://alomoy.vercel.app";
+const SITE_DEFAULT_TITLE = "গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার";
+const SITE_DEFAULT_DESC  = "আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গান এবং গভীর জীবনানুভূতির এক ডিজিটাল সংগ্রহশালা।";
+
+// ─── Dynamic SEO updater ───
+function updateSEOMeta({ title, description, url }) {
+  const t = title || SITE_DEFAULT_TITLE;
+  const d = description || SITE_DEFAULT_DESC;
+  const u = url || SITE_URL + "/";
+
+  document.title = t;
+  setMeta("pageDesc",  d, "content");
+  setMeta("ogTitle",   t, "content");
+  setMeta("ogDesc",    d, "content");
+  setMeta("ogUrl",     u, "content");
+  setMeta("twTitle",   t, "content");
+  setMeta("twDesc",    d, "content");
+  const canonical = document.getElementById("canonicalUrl");
+  if (canonical) canonical.setAttribute("href", u);
+}
+function setMeta(id, value, attr) {
+  const el = document.getElementById(id);
+  if (el) el.setAttribute(attr, value);
+}
+
+// ─── Share Utility ───
+function buildShareUrl(category, serialNumber) {
+  return `${SITE_URL}/#${category}/${serialNumber}`;
+}
+
+function getShareHtml(shareUrl, shareTitle) {
+  const fbUrl  = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+  const waUrl  = `https://wa.me/?text=${encodeURIComponent(shareTitle + " — " + shareUrl)}`;
+  const twUrl  = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`;
+  const hasNativeShare = !!navigator.share;
+
+  return `
+    <div class="reader-share-bar" id="readerShareBar" role="group" aria-label="শেয়ার করুন">
+      <span class="reader-share-label">এই লেখাটি শেয়ার করুন</span>
+      <a href="${fbUrl}" target="_blank" rel="noopener noreferrer" class="share-btn share-btn--facebook" aria-label="ফেসবুকে শেয়ার করুন">
+        <span class="material-symbols-outlined">thumb_up</span>
+        Facebook
+      </a>
+      <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="share-btn share-btn--whatsapp" aria-label="হোয়াটসঅ্যাপে শেয়ার করুন">
+        <span class="material-symbols-outlined">chat</span>
+        WhatsApp
+      </a>
+      <a href="${twUrl}" target="_blank" rel="noopener noreferrer" class="share-btn share-btn--twitter" aria-label="X (Twitter)-এ শেয়ার করুন">
+        <span class="material-symbols-outlined">close</span>
+        𝕏 Twitter
+      </a>
+      <button class="share-btn share-btn--copy" data-copy-url="${shareUrl}" aria-label="লিংক কপি করুন">
+        <span class="material-symbols-outlined">content_copy</span>
+        লিংক কপি
+      </button>
+      ${hasNativeShare ? `<button class="share-btn share-btn--native" id="nativeShareBtn" aria-label="শেয়ার করুন">
+        <span class="material-symbols-outlined">share</span>
+        শেয়ার
+      </button>` : ""}
+    </div>
+  `;
+}
+
+function buildSectionSharePopupHtml(shareUrl, categoryName) {
+  const fbUrl  = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+  const waUrl  = `https://wa.me/?text=${encodeURIComponent(categoryName + " — আলোময় চাকমার " + categoryName + " সংগ্রহ: " + shareUrl)}`;
+  const twUrl  = `https://twitter.com/intent/tweet?text=${encodeURIComponent("আলোময় চাকমার " + categoryName + " পড়ুন:")}&url=${encodeURIComponent(shareUrl)}`;
+  return `
+    <div class="share-popup" role="dialog" aria-label="${categoryName} শেয়ার">
+      <div class="share-popup-title">${categoryName} শেয়ার করুন</div>
+      <div class="share-popup-btns">
+        <a href="${fbUrl}" target="_blank" rel="noopener noreferrer" class="share-btn share-btn--facebook">Facebook</a>
+        <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="share-btn share-btn--whatsapp">WhatsApp</a>
+        <a href="${twUrl}" target="_blank" rel="noopener noreferrer" class="share-btn share-btn--twitter">𝕏 Twitter</a>
+        <button class="share-btn share-btn--copy" data-copy-url="${shareUrl}">লিংক কপি</button>
+      </div>
+    </div>
+  `;
+}
+
+function bindShareEvents(container) {
+  if (!container) return;
+  // Copy buttons
+  container.querySelectorAll(".share-btn--copy[data-copy-url]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const url = btn.getAttribute("data-copy-url");
+      navigator.clipboard.writeText(url).then(() => {
+        showToast("লিংকটি কপি হয়েছে!");
+      }).catch(() => {
+        showToast("লিংক: " + url);
+      });
+    });
+  });
+  // Native share button
+  const nativeBtn = container.querySelector("#nativeShareBtn");
+  if (nativeBtn && navigator.share) {
+    nativeBtn.addEventListener("click", async () => {
+      try {
+        const url = container.querySelector(".share-btn--copy")?.getAttribute("data-copy-url") || SITE_URL;
+        await navigator.share({ title: document.title, url });
+      } catch (err) {
+        // User cancelled — do nothing
+      }
+    });
+  }
+}
+
+function openSectionSharePopup(wrapEl, shareUrl, categoryName) {
+  // Close any existing
+  document.querySelectorAll(".share-popup").forEach(p => p.remove());
+  document.querySelectorAll(".share-popup-overlay").forEach(o => o.remove());
+
+  const popup = document.createElement("div");
+  popup.innerHTML = buildSectionSharePopupHtml(shareUrl, categoryName);
+  const popupEl = popup.firstElementChild;
+  wrapEl.appendChild(popupEl);
+
+  // Overlay to close on outside click
+  const overlay = document.createElement("div");
+  overlay.className = "share-popup-overlay";
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", () => {
+    popupEl.remove();
+    overlay.remove();
+  });
+
+  bindShareEvents(popupEl);
+}
+
+// ─── Hash routing helpers ───
+function getCategorySerial(writing) {
+  const sameCat = writings.filter(w => w.category === writing.category);
+  return sameCat.findIndex(w => w.id === writing.id) + 1;
+}
+
+function pushHash(hashStr) {
+  history.pushState(null, "", "#" + hashStr);
+}
+
+function routeFromHash(hash) {
+  if (!hash || hash === "#" || hash === "#home") {
+    switchPage("home", false);
+    return;
+  }
+  if (hash === "#about") {
+    switchPage("about", false);
+    return;
+  }
+  const catMatch = hash.match(/^#category\/(.+)$/);
+  if (catMatch) {
+    const cat = catMatch[1];
+    const validCats = ["all", "poem", "rhyme", "story", "song"];
+    if (validCats.includes(cat)) {
+      switchPage("home", false);
+      state.currentCategory = cat;
+      elements.filterTabs.forEach(t => {
+        t.classList.toggle("active", t.getAttribute("data-category") === cat);
+      });
+      renderContent();
+      return;
+    }
+  }
+  // Pattern: #poem/3, #rhyme/7, #story/2, #song/1
+  const articleMatch = hash.match(/^#(poem|rhyme|story|song)\/([0-9]+)$/);
+  if (articleMatch) {
+    const cat = articleMatch[1];
+    const serial = parseInt(articleMatch[2], 10);
+    const catWritings = writings.filter(w => w.category === cat);
+    const writing = catWritings[serial - 1];
+    if (writing) {
+      openReaderView(writing.id, false);
+      return;
+    }
+  }
+  // Fallback
+  switchPage("home", false);
+}
+
 // 4. Initialize Function
 function init() {
   setupNavigation();
   setupFilters();
   setupForms();
   renderContent();
+  // Route from hash on load
+  if (window.location.hash && window.location.hash !== "#") {
+    routeFromHash(window.location.hash);
+  }
+  // Listen to browser back/forward
+  window.addEventListener("hashchange", () => {
+    routeFromHash(window.location.hash);
+  });
 }
 
 // 5. Navigation Router (SPA Style Transitions)
@@ -9377,16 +9565,16 @@ function setupNavigation() {
   }
 }
 
-function switchPage(pageId) {
+function switchPage(pageId, updateHash = true) {
   state.currentPage = pageId;
   state.currentReadingId = null;
-  
+
   // Clean up reader background classes if navigating away
   elements.body.classList.remove("rhyme-reader-active");
   elements.body.classList.remove("poem-reader-active");
   elements.body.classList.remove("story-reader-active");
   elements.body.classList.remove("song-reader-active");
-  
+
   // Update active state in navigation links
   elements.navLinks.forEach(link => {
     const pageTarget = link.getAttribute("data-page");
@@ -9396,65 +9584,73 @@ function switchPage(pageId) {
       link.classList.remove("active");
     }
   });
-  
+
   // Handle transitions and displays
   if (pageId === "home") {
     elements.homeView.style.display = "block";
     elements.aboutView.style.display = "none";
     elements.readerView.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
+    if (updateHash) pushHash("home");
+    updateSEOMeta({
+      title: SITE_DEFAULT_TITLE,
+      description: SITE_DEFAULT_DESC,
+      url: SITE_URL + "/#home"
+    });
   } else if (pageId === "about") {
     elements.homeView.style.display = "none";
     elements.aboutView.style.display = "block";
     elements.readerView.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
+    if (updateHash) pushHash("about");
+    updateSEOMeta({
+      title: "পরিচিতি | আলোময় চাকমা",
+      description: "আলোময় চাকমা — চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত সাহিত্যের স্রষ্টার পরিচয়।",
+      url: SITE_URL + "/#about"
+    });
   }
 }
 
 // 7. Reading View Dynamic Rendering
-function openReaderView(articleId) {
+function openReaderView(articleId, updateHash = true) {
   const article = writings.find(w => w.id === articleId);
   if (!article) return;
-  
+
   state.currentPage = "reader";
   state.currentReadingId = articleId;
-  
+
   // Find serial number for this category
   const categoryWritings = writings.filter(w => w.category === article.category);
   const articleIndex = categoryWritings.findIndex(w => w.id === article.id);
-  const serialNum = toBengaliNumber(articleIndex + 1);
-  
+  const serialNumBengali = toBengaliNumber(articleIndex + 1);
+  const serialNumInt = articleIndex + 1;
+
+  // Build share URL: https://alomoy.vercel.app/#poem/3
+  const shareUrl = buildShareUrl(article.category, serialNumInt);
+
+  // Update URL hash
+  if (updateHash) pushHash(`${article.category}/${serialNumInt}`);
+
   // Toggle background image for reader categories
-  if (article.category === "rhyme") {
-    elements.body.classList.add("rhyme-reader-active");
-    elements.body.classList.remove("poem-reader-active");
-    elements.body.classList.remove("story-reader-active");
-    elements.body.classList.remove("song-reader-active");
-  } else if (article.category === "poem") {
-    elements.body.classList.add("poem-reader-active");
-    elements.body.classList.remove("rhyme-reader-active");
-    elements.body.classList.remove("story-reader-active");
-    elements.body.classList.remove("song-reader-active");
-  } else if (article.category === "story") {
-    elements.body.classList.add("story-reader-active");
-    elements.body.classList.remove("rhyme-reader-active");
-    elements.body.classList.remove("poem-reader-active");
-    elements.body.classList.remove("song-reader-active");
-  } else if (article.category === "song") {
-    elements.body.classList.add("song-reader-active");
-    elements.body.classList.remove("rhyme-reader-active");
-    elements.body.classList.remove("poem-reader-active");
-    elements.body.classList.remove("story-reader-active");
-  } else {
-    elements.body.classList.remove("rhyme-reader-active");
-    elements.body.classList.remove("poem-reader-active");
-    elements.body.classList.remove("story-reader-active");
-    elements.body.classList.remove("song-reader-active");
-  }
-  
+  const allReaderClasses = ["rhyme-reader-active", "poem-reader-active", "story-reader-active", "song-reader-active"];
+  allReaderClasses.forEach(c => elements.body.classList.remove(c));
+  if (article.category === "rhyme")  elements.body.classList.add("rhyme-reader-active");
+  if (article.category === "poem")   elements.body.classList.add("poem-reader-active");
+  if (article.category === "story")  elements.body.classList.add("story-reader-active");
+  if (article.category === "song")   elements.body.classList.add("song-reader-active");
+
+  // Update SEO for this article
+  const articleDesc = article.excerpt
+    ? `${article.badge} — ${article.excerpt.slice(0, 120)}`
+    : `${article.badge} | আলোময় চাকমা`;
+  updateSEOMeta({
+    title: `${serialNumBengali}. ${article.title} | ${article.badge} — আলোময় চাকমা`,
+    description: articleDesc,
+    url: shareUrl
+  });
+
   // Render details inside reader
   let contentHtml = "";
-  
   if (article.category === "poem" || article.category === "rhyme" || article.category === "song") {
     article.content.forEach(line => {
       if (line === "__STANZA__") {
@@ -9464,10 +9660,8 @@ function openReaderView(articleId) {
       }
     });
   } else {
-    // Story
     article.content.forEach((para, idx) => {
       if (idx === 0 && article.quote) {
-        // First paragraph followed by featured quote
         contentHtml += `<p class="body-lg">${para}</p>`;
         contentHtml += `<blockquote class="block-quote">${article.quote}</blockquote>`;
       } else {
@@ -9475,22 +9669,29 @@ function openReaderView(articleId) {
       }
     });
   }
-  
+
+  // Build share bar HTML
+  const shareBarHtml = getShareHtml(shareUrl, `${article.title} — আলোময় চাকমা`);
+
   elements.readerContent.innerHTML = `
     <div class="reader-header">
       <span class="label-sm text-secondary uppercase tracking-widest block mb-2">${article.badge}</span>
-      <h1 class="headline-lg">${serialNum}. ${article.title}</h1>
+      <h1 class="headline-lg">${serialNumBengali}. ${article.title}</h1>
       <div class="reader-meta">
         <span>${article.date}</span>
         <span style="margin: 0 12px;">—</span>
         <span>${article.readTime}</span>
       </div>
+      ${shareBarHtml}
     </div>
     <div class="reader-content">
       ${contentHtml}
     </div>
   `;
-  
+
+  // Bind share events inside reader
+  bindShareEvents(elements.readerContent);
+
   // Smooth scroll to top and switch view
   elements.homeView.style.display = "none";
   elements.aboutView.style.display = "none";
@@ -9657,6 +9858,22 @@ function renderContent() {
   const poems = filtered.filter(w => w.category === "poem");
   if (poems.length > 0) {
     elements.poetrySection.style.display = "block";
+    // Section share button
+    const poetrySectionDivider = elements.poetrySection.querySelector(".section-divider");
+    if (poetrySectionDivider && !poetrySectionDivider.parentElement.classList.contains("section-divider-wrap")) {
+      const wrap = document.createElement("div");
+      wrap.className = "section-divider-wrap";
+      poetrySectionDivider.parentNode.insertBefore(wrap, poetrySectionDivider);
+      wrap.appendChild(poetrySectionDivider);
+      const shareWrap = document.createElement("div");
+      shareWrap.className = "section-share-wrap";
+      shareWrap.innerHTML = `<button class="section-share-btn" aria-label="কবিতা শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
+      wrap.appendChild(shareWrap);
+      shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
+        const catUrl = SITE_URL + "/#category/poem";
+        openSectionSharePopup(shareWrap, catUrl, "কবিতা");
+      });
+    }
     const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(poems.length / itemsPerPage);
     if (state.poemPage > totalPages) state.poemPage = totalPages;
@@ -9712,6 +9929,22 @@ function renderContent() {
   const rhymes = filtered.filter(w => w.category === "rhyme");
   if (rhymes.length > 0) {
     elements.rhymesSection.style.display = "block";
+    // Section share button
+    const rhymesSectionDivider = elements.rhymesSection.querySelector(".section-divider");
+    if (rhymesSectionDivider && !rhymesSectionDivider.parentElement.classList.contains("section-divider-wrap")) {
+      const wrap = document.createElement("div");
+      wrap.className = "section-divider-wrap";
+      rhymesSectionDivider.parentNode.insertBefore(wrap, rhymesSectionDivider);
+      wrap.appendChild(rhymesSectionDivider);
+      const shareWrap = document.createElement("div");
+      shareWrap.className = "section-share-wrap";
+      shareWrap.innerHTML = `<button class="section-share-btn" aria-label="ছড়া শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
+      wrap.appendChild(shareWrap);
+      shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
+        const catUrl = SITE_URL + "/#category/rhyme";
+        openSectionSharePopup(shareWrap, catUrl, "ছড়া");
+      });
+    }
     const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(rhymes.length / itemsPerPage);
     if (state.rhymePage > totalPages) state.rhymePage = totalPages;
@@ -9767,6 +10000,22 @@ function renderContent() {
   const stories = filtered.filter(w => w.category === "story" && !w.isFeatured);
   if (stories.length > 0) {
     elements.storiesSection.style.display = "block";
+    // Section share button
+    const storiesSectionDivider = elements.storiesSection.querySelector(".section-divider");
+    if (storiesSectionDivider && !storiesSectionDivider.parentElement.classList.contains("section-divider-wrap")) {
+      const wrap = document.createElement("div");
+      wrap.className = "section-divider-wrap";
+      storiesSectionDivider.parentNode.insertBefore(wrap, storiesSectionDivider);
+      wrap.appendChild(storiesSectionDivider);
+      const shareWrap = document.createElement("div");
+      shareWrap.className = "section-share-wrap";
+      shareWrap.innerHTML = `<button class="section-share-btn" aria-label="গল্প শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
+      wrap.appendChild(shareWrap);
+      shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
+        const catUrl = SITE_URL + "/#category/story";
+        openSectionSharePopup(shareWrap, catUrl, "ছোটগল্প");
+      });
+    }
     const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(stories.length / itemsPerPage);
     if (state.storyPage > totalPages) state.storyPage = totalPages;
@@ -9826,6 +10075,22 @@ function renderContent() {
   const songs = filtered.filter(w => w.category === "song");
   if (songs.length > 0) {
     elements.songsSection.style.display = "block";
+    // Section share button
+    const songsSectionDivider = elements.songsSection.querySelector(".section-divider");
+    if (songsSectionDivider && !songsSectionDivider.parentElement.classList.contains("section-divider-wrap")) {
+      const wrap = document.createElement("div");
+      wrap.className = "section-divider-wrap";
+      songsSectionDivider.parentNode.insertBefore(wrap, songsSectionDivider);
+      wrap.appendChild(songsSectionDivider);
+      const shareWrap = document.createElement("div");
+      shareWrap.className = "section-share-wrap";
+      shareWrap.innerHTML = `<button class="section-share-btn" aria-label="গান শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
+      wrap.appendChild(shareWrap);
+      shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
+        const catUrl = SITE_URL + "/#category/song";
+        openSectionSharePopup(shareWrap, catUrl, "গান");
+      });
+    }
     const itemsPerPage = category === "all" ? 5 : 10;
     const totalPages = Math.ceil(songs.length / itemsPerPage);
     if (state.songPage > totalPages) state.songPage = totalPages;
