@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /generate-sitemap.js
+
+Sitemap: https://alomoy.vercel.app/sitemap.xml
