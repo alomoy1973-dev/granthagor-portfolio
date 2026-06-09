@@ -20,9 +20,10 @@
   <meta property="og:title" id="ogTitle" content="গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার">
   <meta property="og:description" id="ogDesc" content="আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গানের ডিজিটাল সংগ্রহ।">
   <meta property="og:url" id="ogUrl" content="https://alomoy.vercel.app/">
-  <meta property="og:image" content="https://alomoy.vercel.app/logo.png">
+  <meta property="og:image" content="https://alomoy.vercel.app/og-banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার">
   <meta property="og:locale" content="bn_BD">
 
   <!-- ─── Twitter / X Card ─── -->
@@ -30,7 +31,8 @@
   <meta name="twitter:site" content="@alomoy">
   <meta name="twitter:title" id="twTitle" content="গ্রন্থাগার | আলোময় চাকমা">
   <meta name="twitter:description" id="twDesc" content="চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গানের ডিজিটাল সংগ্রহ।">
-  <meta name="twitter:image" content="https://alomoy.vercel.app/logo.png">
+  <meta name="twitter:image" content="https://alomoy.vercel.app/og-banner.png">
+  <meta name="twitter:image:alt" content="চাঙমা সাহিত্য সম্ভার | আলোময় চাকমা">
 
   <!-- ─── JSON-LD Structured Data ─── -->
   <script type="application/ld+json">
@@ -99,6 +101,14 @@
   <link rel="apple-touch-icon" href="logo.png">
 </head>
 <body>
+  <!-- Loading Screen Overlay -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p class="loading-text">লোড হচ্ছে...</p>
+    </div>
+  </div>
+
   <!-- Fixed Immersive Background for Rhyme/Poem View -->
   <div class="reader-bg"></div>
 
