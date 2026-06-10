@@ -56,14 +56,50 @@ function generatePaginationHtml(currentPage, totalPages, type) {
     </button>
   `;
   
-  for (let i = 1; i <= totalPages; i++) {
-    const activeClass = currentPage === i ? 'active' : '';
-    html += `
-      <button class="page-btn page-btn-num ${activeClass}" data-type="${type}" data-page="${i}">
-        ${toBengaliNumber(i)}
-      </button>
-    `;
+  const range = [];
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) {
+      range.push(i);
+    }
+  } else {
+    range.push(1);
+    
+    let start = Math.max(2, currentPage - 1);
+    let end = Math.min(totalPages - 1, currentPage + 1);
+    
+    if (currentPage <= 3) {
+      end = 4;
+    } else if (currentPage >= totalPages - 2) {
+      start = totalPages - 3;
+    }
+    
+    if (start > 2) {
+      range.push('...');
+    }
+    
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    
+    if (end < totalPages - 1) {
+      range.push('...');
+    }
+    
+    range.push(totalPages);
   }
+  
+  range.forEach(item => {
+    if (item === '...') {
+      html += `<span class="page-ellipsis">...</span>`;
+    } else {
+      const activeClass = currentPage === item ? 'active' : '';
+      html += `
+        <button class="page-btn page-btn-num ${activeClass}" data-type="${type}" data-page="${item}">
+          ${toBengaliNumber(item)}
+        </button>
+      `;
+    }
+  });
   
   const nextDisabled = currentPage === totalPages ? 'disabled' : '';
   html += `

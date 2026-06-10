@@ -1615,6 +1615,18 @@ footer {
   justify-content: center;
 }
 
+.page-ellipsis {
+  font-family: var(--font-label);
+  font-size: 13px;
+  color: var(--secondary);
+  padding: 8px 12px;
+  min-width: 35px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Mobile responsive pagination */
 @media (max-width: 480px) {
   .pagination-container {
@@ -1630,6 +1642,11 @@ footer {
   .page-btn-num {
     padding: 6px 8px;
     min-width: 28px;
+  }
+  .page-ellipsis {
+    padding: 6px 8px;
+    min-width: 28px;
+    font-size: 11px;
   }
 
   .pdf-book-grid {
