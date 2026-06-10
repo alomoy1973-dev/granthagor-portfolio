@@ -631,11 +631,11 @@ function openReaderView(articleId, updateHash = true) {
         <span style="margin: 0 12px;">—</span>
         <span>${article.readTime}</span>
       </div>
-      ${shareBarHtml}
     </div>
     <div class="reader-content">
       ${contentHtml}
     </div>
+    ${shareBarHtml}
   `;
 
   // Bind share events inside reader
