@@ -9,28 +9,13 @@ const path = require('path');
 const SITE_URL = 'https://alomoychakma.com';
 const TODAY = new Date().toISOString().slice(0, 10);
 
-// Read app.js and extract the writings array
-const appJs = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
-
-// Extract the writings array section (between "let writings = [" and the closing "];")
-const startMarker = 'let writings = [';
-const startIdx = appJs.indexOf(startMarker);
-const endMarker = '\n];\n';
-const endIdx = appJs.indexOf(endMarker, startIdx);
-
-if (startIdx === -1 || endIdx === -1) {
-  console.error('Could not find writings array in app.js');
-  process.exit(1);
-}
-
-const writingsRaw = appJs.slice(startIdx + startMarker.length - 1, endIdx + 2);
-
-// Use Function constructor to evaluate the array safely
+// Read writings.json directly
 let writings;
 try {
-  writings = Function('return ' + writingsRaw)();
+  const writingsJsonRaw = fs.readFileSync(path.join(__dirname, 'writings.json'), 'utf8');
+  writings = JSON.parse(writingsJsonRaw);
 } catch (e) {
-  console.error('Failed to parse writings array:', e.message);
+  console.error('Failed to read or parse writings.json:', e.message);
   process.exit(1);
 }
 
