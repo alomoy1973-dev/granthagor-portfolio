@@ -976,34 +976,7 @@ body.song-reader-active .reader-bg {
   background-image: url('story-bg.jpg');
 }
 
-/* Immersive semi-transparent sticky header in rhyme/poem mode */
-body.rhyme-reader-active header,
-body.poem-reader-active header {
-  background-color: rgba(27, 28, 26, 0.15); /* tinted transparent header */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-/* Adjust header link contrast for immersive reader state */
-body.rhyme-reader-active header a.nav-link,
-body.rhyme-reader-active header a.logo,
-body.poem-reader-active header a.nav-link,
-body.poem-reader-active header a.logo {
-  color: #faf9f5 !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-body.rhyme-reader-active header a.nav-link:hover,
-body.rhyme-reader-active header a.nav-link.active,
-body.poem-reader-active header a.nav-link:hover,
-body.poem-reader-active header a.nav-link.active {
-  color: #bdcaba !important;
-}
-body.rhyme-reader-active header .btn-primary,
-body.poem-reader-active header .btn-primary {
-  background-color: #faf9f5 !important;
-  color: #1b1c1a !important;
-}
 
 /* Write text directly on the image - no section card division */
 body.rhyme-reader-active .reader-view .reading-well,
