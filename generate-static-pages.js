@@ -44,7 +44,7 @@ const books = [
     year: '2015',
     publisher: 'কল্পতরু প্রকাশনী',
     place: 'রাঙ্গামাটি',
-    image: '/151232853_1515759295293440_7244899773111901235_n.jpg',
+    image: '/ful-bareng-alomoy-chakma-chakma-poetry-book.jpg',
     download: 'https://drive.google.com/uc?export=download&id=15aJ-m6oz1LqUeeUq0dhGNcvgwX0KJhsV'
   },
   {
@@ -56,7 +56,7 @@ const books = [
     year: '2017',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/151596687_1515759328626770_624589289364373614_n.jpg',
+    image: '/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.jpg',
     download: 'https://drive.google.com/uc?export=download&id=15bLPx-LkC4HCN4WdYaZPK4TQDJ-4pL9Z'
   },
   {
@@ -68,7 +68,7 @@ const books = [
     year: '2018',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/152025043_1515759358626767_5412279674404707896_n.jpg',
+    image: '/tinnomuri-alomoy-chakma-chakma-rhyme-book.jpg',
     download: 'https://drive.google.com/uc?export=download&id=15PlXb7JW7LZgMfUnYJnNKhiSPPZJO1Hp'
   },
   {
@@ -80,7 +80,7 @@ const books = [
     year: '2019',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/151152526_1515759258626777_4833468800934350787_n.jpg',
+    image: '/monpudi-alomoy-chakma-chakma-poetry-book.jpg',
     download: 'https://drive.google.com/uc?export=download&id=15LZJvC3T0MFdR8SBqj4dMcN8YTzoys2j'
   },
   {
@@ -92,7 +92,7 @@ const books = [
     year: '2020',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/151141846_1515759225293447_6242898364909658586_n.jpg',
+    image: '/nauri-alomoy-chakma-chakma-rhyme-book.jpg',
     download: 'https://drive.google.com/uc?export=download&id=15_RxnUlgBZBHzMLFIqmDIml5NPVdAK9a'
   }
 ];
