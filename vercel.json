@@ -3,6 +3,9 @@
     { "source": "/home", "destination": "/", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!sitemap\\.xml$|robots\\.txt$|.*\\.json$|.*\\.css$|.*\\.js$|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.ico$|.*\\.webp$|.*\\.svg$|.*\\.woff2?$|.*\\.ttf$|.*\\.txt$|.*\\.xml$).*)",
+      "destination": "/index.html"
+    }
   ]
 }
