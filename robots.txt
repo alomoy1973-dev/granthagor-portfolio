@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /generate-sitemap.js
 
-Sitemap: https://alomoy.vercel.app/sitemap.xml
+Sitemap: https://alomoychakma.com/sitemap.xml

@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://alomoy.vercel.app';
+const SITE_URL = 'https://alomoychakma.com';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 // Read app.js and extract the writings array

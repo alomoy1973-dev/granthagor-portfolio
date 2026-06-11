@@ -200,7 +200,7 @@ const elements = {
 };
 
 // ─── SEO Constants ───
-const SITE_URL = "https://alomoy.vercel.app";
+const SITE_URL = "https://alomoychakma.com";
 const SITE_DEFAULT_TITLE = "গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার";
 const SITE_DEFAULT_DESC  = "আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গান এবং গভীর জীবনানুভূতির এক ডিজিটাল সংগ্রহশালা।";
 
@@ -623,7 +623,7 @@ function openReaderView(articleId, updateHash = true) {
   const serialNumBengali = toBengaliNumber(articleIndex + 1);
   const serialNumInt = articleIndex + 1;
 
-  // Build share URL: https://alomoy.vercel.app/#poem/3
+  // Build share URL: https://alomoychakma.com/#poem/3
   const shareUrl = buildShareUrl(article.category, serialNumInt);
 
   // Update URL hash
