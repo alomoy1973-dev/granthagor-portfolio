@@ -972,7 +972,7 @@ function renderContent() {
       shareWrap.innerHTML = `<button class="section-share-btn" aria-label="কবিতা শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
       wrap.appendChild(shareWrap);
       shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
-        const catUrl = SITE_URL + "/#category/poem";
+        const catUrl = SITE_URL + "/category/poem";
         openSectionSharePopup(shareWrap, catUrl, "কবিতা");
       });
     }
@@ -1043,7 +1043,7 @@ function renderContent() {
       shareWrap.innerHTML = `<button class="section-share-btn" aria-label="ছড়া শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
       wrap.appendChild(shareWrap);
       shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
-        const catUrl = SITE_URL + "/#category/rhyme";
+        const catUrl = SITE_URL + "/category/rhyme";
         openSectionSharePopup(shareWrap, catUrl, "ছড়া");
       });
     }
@@ -1114,7 +1114,7 @@ function renderContent() {
       shareWrap.innerHTML = `<button class="section-share-btn" aria-label="গল্প শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
       wrap.appendChild(shareWrap);
       shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
-        const catUrl = SITE_URL + "/#category/story";
+        const catUrl = SITE_URL + "/category/story";
         openSectionSharePopup(shareWrap, catUrl, "ছোটগল্প");
       });
     }
@@ -1189,7 +1189,7 @@ function renderContent() {
       shareWrap.innerHTML = `<button class="section-share-btn" aria-label="গান শেয়ার করুন"><span class="material-symbols-outlined">share</span><span>শেয়ার</span></button>`;
       wrap.appendChild(shareWrap);
       shareWrap.querySelector(".section-share-btn").addEventListener("click", () => {
-        const catUrl = SITE_URL + "/#category/song";
+        const catUrl = SITE_URL + "/category/song";
         openSectionSharePopup(shareWrap, catUrl, "গান");
       });
     }

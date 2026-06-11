@@ -1,5 +1,15 @@
 User-agent: *
 Allow: /
 Disallow: /generate-sitemap.js
+Disallow: /generate-static-pages.js
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 Sitemap: https://alomoychakma.com/sitemap.xml

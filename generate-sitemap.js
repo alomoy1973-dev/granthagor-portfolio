@@ -8,6 +8,13 @@ const path = require('path');
 
 const SITE_URL = 'https://alomoychakma.com';
 const TODAY = new Date().toISOString().slice(0, 10);
+const books = [
+  'ful-bareng',
+  'hakkeng-hakkeng',
+  'tinnomuri',
+  'monpudi',
+  'nauri'
+];
 
 // Read writings.json directly
 let writings;
@@ -30,6 +37,11 @@ let urls = [];
 // Static pages
 urls.push({ loc: SITE_URL + '/', priority: '1.0', changefreq: 'weekly' });
 urls.push({ loc: SITE_URL + '/about', priority: '0.8', changefreq: 'monthly' });
+
+// Book pages
+books.forEach(slug => {
+  urls.push({ loc: `${SITE_URL}/books/${slug}`, priority: '0.8', changefreq: 'monthly' });
+});
 
 // Category pages
 const catMeta = {
@@ -72,6 +84,7 @@ fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), xml, 'utf8');
 
 console.log(`✅ sitemap.xml generated with ${urls.length} URLs`);
 console.log(`   Static pages: 2`);
+console.log(`   Book pages: ${books.length}`);
 console.log(`   Category pages: ${categories.length}`);
 categories.forEach(cat => {
   console.log(`   ${cat}: ${grouped[cat].length} entries`);
