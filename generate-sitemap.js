@@ -29,7 +29,7 @@ let urls = [];
 
 // Static pages
 urls.push({ loc: SITE_URL + '/', priority: '1.0', changefreq: 'weekly' });
-urls.push({ loc: SITE_URL + '/#about', priority: '0.8', changefreq: 'monthly' });
+urls.push({ loc: SITE_URL + '/about', priority: '0.8', changefreq: 'monthly' });
 
 // Category pages
 const catMeta = {
@@ -39,14 +39,14 @@ const catMeta = {
   song:  { priority: '0.9', changefreq: 'weekly' },
 };
 categories.forEach(cat => {
-  urls.push({ loc: `${SITE_URL}/#category/${cat}`, priority: catMeta[cat].priority, changefreq: catMeta[cat].changefreq });
+  urls.push({ loc: `${SITE_URL}/category/${cat}`, priority: catMeta[cat].priority, changefreq: catMeta[cat].changefreq });
 });
 
-// Individual article pages: #poem/1, #rhyme/2, etc.
+// Individual article pages: /poem/1, /rhyme/2, etc.
 categories.forEach(cat => {
   grouped[cat].forEach((writing, idx) => {
     urls.push({
-      loc: `${SITE_URL}/#${cat}/${idx + 1}`,
+      loc: `${SITE_URL}/${cat}/${idx + 1}`,
       priority: '0.7',
       changefreq: 'yearly',
       lastmod: TODAY

@@ -227,7 +227,7 @@ function setMeta(id, value, attr) {
 
 // ─── Share Utility ───
 function buildShareUrl(category, serialNumber) {
-  return `${SITE_URL}/#${category}/${serialNumber}`;
+  return `${SITE_URL}/${category}/${serialNumber}`;
 }
 
 function getShareHtml(shareUrl, shareTitle) {
@@ -330,46 +330,48 @@ function openSectionSharePopup(wrapEl, shareUrl, categoryName) {
   bindShareEvents(popupEl);
 }
 
-// ─── Hash routing helpers ───
+// ─── History API routing helpers ───
 function getCategorySerial(writing) {
   const sameCat = writings.filter(w => w.category === writing.category);
   return sameCat.findIndex(w => w.id === writing.id) + 1;
 }
 
-function pushHash(hashStr) {
-  history.pushState(null, "", "#" + hashStr);
+function pushPath(pathStr) {
+  history.pushState(null, "", "/" + pathStr);
 }
 
-function routeFromHash(hash) {
-  // Always close modals by default when hash changes to anything else,
-  // unless we are explicitly routing to them.
-  if (hash !== "#contact") {
+function routeFromPath(path) {
+  // Normalise: strip leading slash
+  const p = path.replace(/^\//, "");
+
+  // Always close modals by default unless routing to them.
+  if (p !== "contact") {
     closeContactModal(false);
   }
-  if (hash !== "#developer") {
+  if (p !== "developer") {
     closeDevModal(false);
   }
 
-  if (hash === "#contact") {
+  if (p === "contact") {
     switchPage("home", false);
     openContactModal(false);
     return;
   }
-  if (hash === "#developer") {
+  if (p === "developer") {
     switchPage("home", false);
     openDevModal(false);
     return;
   }
 
-  if (!hash || hash === "#" || hash === "#home") {
+  if (!p || p === "home") {
     switchPage("home", false);
     return;
   }
-  if (hash === "#about") {
+  if (p === "about") {
     switchPage("about", false);
     return;
   }
-  const catMatch = hash.match(/^#category\/(.+)$/);
+  const catMatch = p.match(/^category\/(.+)$/);
   if (catMatch) {
     const cat = catMatch[1];
     const validCats = ["all", "poem", "rhyme", "story", "song"];
@@ -383,8 +385,8 @@ function routeFromHash(hash) {
       return;
     }
   }
-  // Pattern: #poem/3, #rhyme/7, #story/2, #song/1
-  const articleMatch = hash.match(/^#(poem|rhyme|story|song)\/([0-9]+)$/);
+  // Pattern: poem/3, rhyme/7, story/2, song/1
+  const articleMatch = p.match(/^(poem|rhyme|story|song)\/([0-9]+)$/);
   if (articleMatch) {
     const cat = articleMatch[1];
     const serial = parseInt(articleMatch[2], 10);
@@ -397,6 +399,51 @@ function routeFromHash(hash) {
   }
   // Fallback
   switchPage("home", false);
+}
+
+// ─── Per-article JSON-LD Schema Injector ───
+function updateArticleSchema(article, serialNum, shareUrl) {
+  let el = document.getElementById("articleSchema");
+  if (!el) {
+    el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.id = "articleSchema";
+    document.head.appendChild(el);
+  }
+
+  const typeMap = {
+    story: "Article",
+    poem:  "CreativeWork",
+    rhyme: "CreativeWork",
+    song:  "CreativeWork"
+  };
+  const genreMap = {
+    story: "Short Story",
+    poem:  "Poetry",
+    rhyme: "Rhyme",
+    song:  "Song"
+  };
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": typeMap[article.category] || "CreativeWork",
+    "headline": article.title,
+    "name": article.title,
+    "author": { "@id": "https://alomoychakma.com/#author" },
+    "inLanguage": "bn",
+    "genre": genreMap[article.category] || "Literature",
+    "url": shareUrl,
+    "description": article.excerpt ? article.excerpt.slice(0, 160) : undefined,
+    "position": serialNum
+  };
+  if (!schema.description) delete schema.description;
+
+  el.textContent = JSON.stringify(schema, null, 2);
+}
+
+function clearArticleSchema() {
+  const el = document.getElementById("articleSchema");
+  if (el) el.remove();
 }
 
 // 4. Initialize Function
@@ -417,13 +464,14 @@ async function init() {
   setupFilters();
   setupForms();
   renderContent();
-  // Route from hash on load
-  if (window.location.hash && window.location.hash !== "#") {
-    routeFromHash(window.location.hash);
+  // Route from pathname on load
+  const initialPath = window.location.pathname;
+  if (initialPath && initialPath !== "/") {
+    routeFromPath(initialPath);
   }
-  // Listen to browser back/forward
-  window.addEventListener("hashchange", () => {
-    routeFromHash(window.location.hash);
+  // Listen to browser back/forward (History API)
+  window.addEventListener("popstate", () => {
+    routeFromPath(window.location.pathname);
   });
 }
 
@@ -462,7 +510,7 @@ function setupNavigation() {
   }
   elements.closeModal.addEventListener("click", (e) => {
     e.preventDefault();
-    if (window.location.hash === "#contact") {
+    if (window.location.pathname === "/contact") {
       history.back();
     } else {
       closeContactModal(false);
@@ -472,7 +520,7 @@ function setupNavigation() {
   // Close modal when clicking outside the modal box
   elements.contactModal.addEventListener("click", (e) => {
     if (e.target === elements.contactModal) {
-      if (window.location.hash === "#contact") {
+      if (window.location.pathname === "/contact") {
         history.back();
       } else {
         closeContactModal(false);
@@ -544,7 +592,7 @@ function setupNavigation() {
   if (closeDevModal && devModal) {
     closeDevModal.addEventListener("click", (e) => {
       e.preventDefault();
-      if (window.location.hash === "#developer") {
+      if (window.location.pathname === "/developer") {
         history.back();
       } else {
         closeDevModal(false);
@@ -553,7 +601,7 @@ function setupNavigation() {
 
     devModal.addEventListener("click", (e) => {
       if (e.target === devModal) {
-        if (window.location.hash === "#developer") {
+        if (window.location.pathname === "/developer") {
           history.back();
         } else {
           closeDevModal(false);
@@ -589,22 +637,24 @@ function switchPage(pageId, updateHash = true) {
     elements.aboutView.style.display = "none";
     elements.readerView.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (updateHash) pushHash("home");
+    clearArticleSchema();
+    if (updateHash) pushPath("home");
     updateSEOMeta({
       title: SITE_DEFAULT_TITLE,
       description: SITE_DEFAULT_DESC,
-      url: SITE_URL + "/#home"
+      url: SITE_URL + "/"
     });
   } else if (pageId === "about") {
     elements.homeView.style.display = "none";
     elements.aboutView.style.display = "block";
     elements.readerView.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (updateHash) pushHash("about");
+    clearArticleSchema();
+    if (updateHash) pushPath("about");
     updateSEOMeta({
       title: "পরিচিতি | আলোময় চাকমা",
       description: "আলোময় চাকমা — চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত সাহিত্যের স্রষ্টার পরিচয়।",
-      url: SITE_URL + "/#about"
+      url: SITE_URL + "/about"
     });
   }
 }
@@ -623,11 +673,11 @@ function openReaderView(articleId, updateHash = true) {
   const serialNumBengali = toBengaliNumber(articleIndex + 1);
   const serialNumInt = articleIndex + 1;
 
-  // Build share URL: https://alomoychakma.com/#poem/3
+  // Build share URL: https://alomoychakma.com/poem/3
   const shareUrl = buildShareUrl(article.category, serialNumInt);
 
-  // Update URL hash
-  if (updateHash) pushHash(`${article.category}/${serialNumInt}`);
+  // Update URL path
+  if (updateHash) pushPath(`${article.category}/${serialNumInt}`);
 
   // Toggle background image for reader categories
   const allReaderClasses = ["rhyme-reader-active", "poem-reader-active", "story-reader-active", "song-reader-active"];
@@ -639,13 +689,16 @@ function openReaderView(articleId, updateHash = true) {
 
   // Update SEO for this article
   const articleDesc = article.excerpt
-    ? `${article.badge} — ${article.excerpt.slice(0, 120)}`
+    ? `${article.title} — ${article.excerpt.slice(0, 130)}`
     : `${article.badge} | আলোময় চাকমা`;
   updateSEOMeta({
     title: `${serialNumBengali}. ${article.title} | ${article.badge} — আলোময় চাকমা`,
     description: articleDesc,
     url: shareUrl
   });
+
+  // Inject per-article JSON-LD schema
+  updateArticleSchema(article, serialNumInt, shareUrl);
 
   // Render details inside reader
   let contentHtml = "";
@@ -796,7 +849,7 @@ function openContactModal(updateHash = true) {
   elements.contactModal.offsetHeight;
   elements.contactModal.classList.add("open");
   elements.body.style.overflow = "hidden"; // Disable scroll when modal is open
-  if (updateHash) pushHash("contact");
+  if (updateHash) pushPath("contact");
 }
 
 function closeContactModal(updateHash = true) {
@@ -817,7 +870,7 @@ function openDevModal(updateHash = true) {
   devModal.offsetHeight; // Force reflow
   devModal.classList.add("open");
   elements.body.style.overflow = "hidden";
-  if (updateHash) pushHash("developer");
+  if (updateHash) pushPath("developer");
 }
 
 function closeDevModal(updateHash = true) {
