@@ -3,11 +3,11 @@
 Alomoy Chakma is a Chakma language poet and fiction writer from the Chittagong Hill Tracts, Bangladesh. The site is a digital literary archive for his poems, rhymes, short stories, songs, and published books.
 
 Primary sections:
-- Poems: https://alomoychakma.com/category/poem
-- Rhymes: https://alomoychakma.com/category/rhyme
-- Short stories: https://alomoychakma.com/category/story
-- Songs: https://alomoychakma.com/category/song
-- Author biography: https://alomoychakma.com/about
+- Poems: https://www.alomoychakma.com/category/poem
+- Rhymes: https://www.alomoychakma.com/category/rhyme
+- Short stories: https://www.alomoychakma.com/category/story
+- Songs: https://www.alomoychakma.com/category/song
+- Author biography: https://www.alomoychakma.com/about
 
 Published books:
 - Ful Bareng / ফুল বারেঙ, poetry, 2015
@@ -22,6 +22,6 @@ Important entities:
 - Region: Chittagong Hill Tracts, Bangladesh
 - Topics: Chakma literature, Chakma poetry, Chakma rhymes, indigenous literature of Bangladesh, CHT poetry digital archive
 
-Canonical site: https://alomoychakma.com/
-Sitemap: https://alomoychakma.com/sitemap.xml
+Canonical site: https://www.alomoychakma.com/
+Sitemap: https://www.alomoychakma.com/sitemap.xml
 Contact: alomoyc6@gmail.com

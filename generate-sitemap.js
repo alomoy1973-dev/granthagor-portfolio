@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://alomoychakma.com';
+const SITE_URL = 'https://www.alomoychakma.com';
 const TODAY = new Date().toISOString().slice(0, 10);
 const books = [
   'ful-bareng',
