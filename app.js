@@ -496,6 +496,43 @@ function setupNavigation() {
           pdfSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }, 50);
+  }
+
+  const footerDevLink = document.getElementById("footerDevLink");
+  const devModal = document.getElementById("devModal");
+  const closeDevModal = document.getElementById("closeDevModal");
+
+  if (footerDevLink && devModal) {
+    footerDevLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      devModal.style.display = "block";
+      devModal.offsetHeight; // Force reflow
+      devModal.classList.add("open");
+      elements.body.style.overflow = "hidden";
+    });
+  }
+
+  if (closeDevModal && devModal) {
+    closeDevModal.addEventListener("click", () => {
+      devModal.classList.remove("open");
+      elements.body.style.overflow = "";
+      setTimeout(() => {
+        if (!devModal.classList.contains("open")) {
+          devModal.style.display = "none";
+        }
+      }, 300);
+    });
+
+    devModal.addEventListener("click", (e) => {
+      if (e.target === devModal) {
+        devModal.classList.remove("open");
+        elements.body.style.overflow = "";
+        setTimeout(() => {
+          if (!devModal.classList.contains("open")) {
+            devModal.style.display = "none";
+          }
+        }, 300);
+      }
     });
   }
 }
