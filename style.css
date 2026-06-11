@@ -1033,82 +1033,67 @@ body.poem-reader-active .reader-header h1.headline-lg {
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-body.rhyme-reader-active .reader-meta,
-body.poem-reader-active .reader-meta {
-  color: #dbdad6 !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-body.rhyme-reader-active .reader-content p.poem-line,
-body.poem-reader-active .reader-content p.poem-line {
-  color: #faf9f5 !important;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.5);
-  font-size: 22px;
-  font-weight: 500;
-}
-
-body.story-reader-active {
-  background-color: #f8f6ef;
-}
-
-body.story-reader-active .reader-view .reading-well {
-  background-color: rgba(250, 249, 245, 0.9);
-  border: 1px solid rgba(196, 199, 199, 0.72);
-  box-shadow: 0 18px 40px rgba(27, 28, 26, 0.08);
-  padding: 40px;
-}
-
-body.story-reader-active .reader-header {
-  border-bottom-color: rgba(116, 120, 120, 0.32);
-}
-
-body.story-reader-active .reader-content {
-  color: #171817;
-  font-weight: 500;
-}
-
-body.story-reader-active .reader-content p {
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.68);
-}
-
 body.rhyme-reader-active,
 body.poem-reader-active,
 body.story-reader-active,
 body.song-reader-active {
-  background-color: #f8f6ef;
+  background-color: var(--background); /* Use the new warm cream background */
 }
 
 body.rhyme-reader-active .reader-view .reading-well,
 body.poem-reader-active .reader-view .reading-well,
 body.story-reader-active .reader-view .reading-well,
 body.song-reader-active .reader-view .reading-well {
-  background-color: rgba(250, 249, 245, 0.82) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important; /* Clean semi-transparent white card background */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(196, 199, 199, 0.6) !important;
-  box-shadow: 0 24px 64px rgba(27, 28, 26, 0.12) !important;
+  border: 1px solid var(--outline-variant) !important; /* Mapped outline variant */
+  box-shadow: 0 24px 64px rgba(204, 102, 17, 0.08) !important; /* Soft warm shadow using primary color */
   padding: 40px !important;
   margin-top: 32px;
   margin-bottom: 32px;
 }
 
+/* Back button inside reader view */
 body.rhyme-reader-active .reader-view .reader-back,
 body.poem-reader-active .reader-view .reader-back,
 body.story-reader-active .reader-view .reader-back,
-body.song-reader-active .reader-view .reader-back,
+body.song-reader-active .reader-view .reader-back {
+  color: var(--secondary) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+body.rhyme-reader-active .reader-view .reader-back:hover,
+body.poem-reader-active .reader-view .reader-back:hover,
+body.story-reader-active .reader-view .reader-back:hover,
+body.song-reader-active .reader-view .reader-back:hover {
+  color: var(--primary) !important; /* Orange hover for back button */
+}
+
+/* Article title inside reader view */
 body.rhyme-reader-active .reader-header h1.headline-lg,
 body.poem-reader-active .reader-header h1.headline-lg,
 body.story-reader-active .reader-header h1.headline-lg,
-body.song-reader-active .reader-header h1.headline-lg,
+body.song-reader-active .reader-header h1.headline-lg {
+  color: var(--primary) !important; /* Make title orange! */
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Meta details (date, read time) */
 body.rhyme-reader-active .reader-meta,
 body.poem-reader-active .reader-meta,
 body.story-reader-active .reader-meta,
-body.song-reader-active .reader-meta,
+body.song-reader-active .reader-meta {
+  color: var(--secondary) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Body text & lines of poems/stories */
 body.rhyme-reader-active .reader-content p.poem-line,
 body.poem-reader-active .reader-content p.poem-line,
 body.story-reader-active .reader-content p,
 body.song-reader-active .reader-content p.poem-line {
-  color: #171817 !important;
+  color: var(--on-surface) !important; /* Dark readable text #222222 */
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) !important;
 }
 
