@@ -481,21 +481,7 @@ function setupNavigation() {
     });
   }
 
-  const footerRssLink = document.getElementById("footerRssLink");
-  if (footerRssLink) {
-    footerRssLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showToast("আরএসএস ফিড শীঘ্রই চালু হচ্ছে!");
-    });
-  }
 
-  const footerArchiveLink = document.getElementById("footerArchiveLink");
-  if (footerArchiveLink) {
-    footerArchiveLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showToast("ডিজিটাল সংগ্রহশালা আর্কাইভ বর্তমানে বন্ধ রয়েছে।");
-    });
-  }
 
   const footerPdfCollectionLink = document.getElementById("footerPdfCollectionLink");
   if (footerPdfCollectionLink) {
