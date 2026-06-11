@@ -496,6 +496,7 @@ function setupNavigation() {
           pdfSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }, 50);
+    });
   }
 
   const footerDevLink = document.getElementById("footerDevLink");
