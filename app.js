@@ -341,6 +341,26 @@ function pushHash(hashStr) {
 }
 
 function routeFromHash(hash) {
+  // Always close modals by default when hash changes to anything else,
+  // unless we are explicitly routing to them.
+  if (hash !== "#contact") {
+    closeContactModal(false);
+  }
+  if (hash !== "#developer") {
+    closeDevModal(false);
+  }
+
+  if (hash === "#contact") {
+    switchPage("home", false);
+    openContactModal(false);
+    return;
+  }
+  if (hash === "#developer") {
+    switchPage("home", false);
+    openDevModal(false);
+    return;
+  }
+
   if (!hash || hash === "#" || hash === "#home") {
     switchPage("home", false);
     return;
@@ -433,19 +453,30 @@ function setupNavigation() {
   });
 
   // Contact Modal triggers
-  elements.contactBtn.addEventListener("click", openContactModal);
+  elements.contactBtn.addEventListener("click", () => openContactModal());
   if (elements.footerContactBtn) {
     elements.footerContactBtn.addEventListener("click", (e) => {
       e.preventDefault();
       openContactModal();
     });
   }
-  elements.closeModal.addEventListener("click", closeContactModal);
+  elements.closeModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (window.location.hash === "#contact") {
+      history.back();
+    } else {
+      closeContactModal(false);
+    }
+  });
   
   // Close modal when clicking outside the modal box
   elements.contactModal.addEventListener("click", (e) => {
     if (e.target === elements.contactModal) {
-      closeContactModal();
+      if (window.location.hash === "#contact") {
+        history.back();
+      } else {
+        closeContactModal(false);
+      }
     }
   });
 
@@ -506,33 +537,27 @@ function setupNavigation() {
   if (footerDevLink && devModal) {
     footerDevLink.addEventListener("click", (e) => {
       e.preventDefault();
-      devModal.style.display = "block";
-      devModal.offsetHeight; // Force reflow
-      devModal.classList.add("open");
-      elements.body.style.overflow = "hidden";
+      openDevModal();
     });
   }
 
   if (closeDevModal && devModal) {
-    closeDevModal.addEventListener("click", () => {
-      devModal.classList.remove("open");
-      elements.body.style.overflow = "";
-      setTimeout(() => {
-        if (!devModal.classList.contains("open")) {
-          devModal.style.display = "none";
-        }
-      }, 300);
+    closeDevModal.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (window.location.hash === "#developer") {
+        history.back();
+      } else {
+        closeDevModal(false);
+      }
     });
 
     devModal.addEventListener("click", (e) => {
       if (e.target === devModal) {
-        devModal.classList.remove("open");
-        elements.body.style.overflow = "";
-        setTimeout(() => {
-          if (!devModal.classList.contains("open")) {
-            devModal.style.display = "none";
-          }
-        }, 300);
+        if (window.location.hash === "#developer") {
+          history.back();
+        } else {
+          closeDevModal(false);
+        }
       }
     });
   }
@@ -765,21 +790,44 @@ function setupForms() {
   });
 }
 
-function openContactModal() {
+function openContactModal(updateHash = true) {
   elements.contactModal.style.display = "block";
   // Force a reflow to trigger animation
   elements.contactModal.offsetHeight;
   elements.contactModal.classList.add("open");
   elements.body.style.overflow = "hidden"; // Disable scroll when modal is open
+  if (updateHash) pushHash("contact");
 }
 
-function closeContactModal() {
+function closeContactModal(updateHash = true) {
   elements.contactModal.classList.remove("open");
   elements.body.style.overflow = ""; // Re-enable scroll
   // Delay removing display block until slide transition is done
   setTimeout(() => {
     if (!elements.contactModal.classList.contains("open")) {
       elements.contactModal.style.display = "none";
+    }
+  }, 300);
+}
+
+function openDevModal(updateHash = true) {
+  const devModal = document.getElementById("devModal");
+  if (!devModal) return;
+  devModal.style.display = "block";
+  devModal.offsetHeight; // Force reflow
+  devModal.classList.add("open");
+  elements.body.style.overflow = "hidden";
+  if (updateHash) pushHash("developer");
+}
+
+function closeDevModal(updateHash = true) {
+  const devModal = document.getElementById("devModal");
+  if (!devModal) return;
+  devModal.classList.remove("open");
+  elements.body.style.overflow = "";
+  setTimeout(() => {
+    if (!devModal.classList.contains("open")) {
+      devModal.style.display = "none";
     }
   }, 300);
 }
