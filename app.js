@@ -464,10 +464,17 @@ async function init() {
   setupFilters();
   setupForms();
   renderContent();
-  // Route from pathname on load
-  const initialPath = window.location.pathname;
-  if (initialPath && initialPath !== "/") {
-    routeFromPath(initialPath);
+  // Route from pathname or redirect query parameter on load
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectPath = urlParams.get('p');
+  if (redirectPath) {
+    window.history.replaceState(null, "", redirectPath);
+    routeFromPath(redirectPath);
+  } else {
+    const initialPath = window.location.pathname;
+    if (initialPath && initialPath !== "/") {
+      routeFromPath(initialPath);
+    }
   }
   // Listen to browser back/forward (History API)
   window.addEventListener("popstate", () => {
@@ -938,7 +945,7 @@ function renderContent() {
         </div>
         <div class="col-4">
           <div class="mood-card">
-            <img src="screen.png" alt="বই এবং দোয়াত কালির নান্দনিক ছবি" class="mood-image">
+            <img src="screen-feature.webp" alt="বই এবং দোয়াত কালির নান্দনিক ছবি" class="mood-image" width="239" height="480" decoding="async">
             <div class="mood-overlay">
               <p class="mood-quote">"${featured.quote}"</p>
             </div>

@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    if (window.location.pathname && window.location.pathname !== '/') {
+      window.location.replace('/?p=' + encodeURIComponent(window.location.pathname + window.location.search + window.location.hash));
+    }
+  </script>
   <title>উয়ুরী উদিবার ভারী ধাব | কবিতা — আলোময় চাকমা</title>
   <meta name="description" content="উয়ুরী উদিবার ভারী ধাব — আমুঞ্যাঁ ওই ভাবঙর। মনে মনে হোচপানার সুধো নালুন জড়াঙর। সে মাধানত তুই এলে, ভোক্কাই দিলেগি! ন&#39; অলে, আজা">
   <meta name="robots" content="index, follow">
@@ -21,7 +26,7 @@
   <meta name="twitter:description" content="উয়ুরী উদিবার ভারী ধাব — আমুঞ্যাঁ ওই ভাবঙর। মনে মনে হোচপানার সুধো নালুন জড়াঙর। সে মাধানত তুই এলে, ভোক্কাই দিলেগি! ন&#39; অলে, আজা">
   <meta name="twitter:image" content="https://www.alomoychakma.com/og-banner.png">
   <link rel="stylesheet" href="/style.css">
-  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="icon" type="image/png" href="/favicon-96.png">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "CreativeWork",
@@ -42,7 +47,7 @@
     <div class="container-max">
       <nav>
         <a href="/" class="logo" style="text-transform:none;">
-          <div class="logo-img-wrapper"><img src="/logo.png" alt="আলোময় চাকমা - Alomoy Chakma" class="logo-img" width="38" height="38"></div>
+          <div class="logo-img-wrapper"><img src="/logo-96.webp" alt="আলোময় চাকমা - Alomoy Chakma" class="logo-img" width="38" height="38" decoding="async"></div>
           <span>আলোময় চাকমা</span>
         </a>
         <div class="nav-links">

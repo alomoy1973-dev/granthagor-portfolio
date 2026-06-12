@@ -44,7 +44,7 @@ const books = [
     year: '2015',
     publisher: 'কল্পতরু প্রকাশনী',
     place: 'রাঙ্গামাটি',
-    image: '/ful-bareng-alomoy-chakma-chakma-poetry-book.jpg',
+    image: '/ful-bareng-alomoy-chakma-chakma-poetry-book.webp',
     download: 'https://drive.google.com/uc?export=download&id=15aJ-m6oz1LqUeeUq0dhGNcvgwX0KJhsV'
   },
   {
@@ -56,7 +56,7 @@ const books = [
     year: '2017',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.jpg',
+    image: '/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.webp',
     download: 'https://drive.google.com/uc?export=download&id=15bLPx-LkC4HCN4WdYaZPK4TQDJ-4pL9Z'
   },
   {
@@ -68,7 +68,7 @@ const books = [
     year: '2018',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/tinnomuri-alomoy-chakma-chakma-rhyme-book.jpg',
+    image: '/tinnomuri-alomoy-chakma-chakma-rhyme-book.webp',
     download: 'https://drive.google.com/uc?export=download&id=15PlXb7JW7LZgMfUnYJnNKhiSPPZJO1Hp'
   },
   {
@@ -80,7 +80,7 @@ const books = [
     year: '2019',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/monpudi-alomoy-chakma-chakma-poetry-book.jpg',
+    image: '/monpudi-alomoy-chakma-chakma-poetry-book.webp',
     download: 'https://drive.google.com/uc?export=download&id=15LZJvC3T0MFdR8SBqj4dMcN8YTzoys2j'
   },
   {
@@ -92,7 +92,7 @@ const books = [
     year: '2020',
     publisher: 'পরিবার প্রকাশনী',
     place: 'ঢাকা',
-    image: '/nauri-alomoy-chakma-chakma-rhyme-book.jpg',
+    image: '/nauri-alomoy-chakma-chakma-rhyme-book.webp',
     download: 'https://drive.google.com/uc?export=download&id=15_RxnUlgBZBHzMLFIqmDIml5NPVdAK9a'
   }
 ];
@@ -132,6 +132,11 @@ function pageShell({ title, description, canonical, body, schema, bodyClass = ''
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    if (window.location.pathname && window.location.pathname !== '/') {
+      window.location.replace('/?p=' + encodeURIComponent(window.location.pathname + window.location.search + window.location.hash));
+    }
+  </script>
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="robots" content="index, follow">
@@ -150,7 +155,7 @@ function pageShell({ title, description, canonical, body, schema, bodyClass = ''
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${SITE_URL}/og-banner.png">
   <link rel="stylesheet" href="/style.css">
-  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="icon" type="image/png" href="/favicon-96.png">
   ${schemaHtml}
 </head>
 <body class="${escapeHtml(bodyClass)}">
@@ -158,7 +163,7 @@ function pageShell({ title, description, canonical, body, schema, bodyClass = ''
     <div class="container-max">
       <nav>
         <a href="/" class="logo" style="text-transform:none;">
-          <div class="logo-img-wrapper"><img src="/logo.png" alt="আলোময় চাকমা - Alomoy Chakma" class="logo-img" width="38" height="38"></div>
+          <div class="logo-img-wrapper"><img src="/logo-96.webp" alt="আলোময় চাকমা - Alomoy Chakma" class="logo-img" width="38" height="38" decoding="async"></div>
           <span>আলোময় চাকমা</span>
         </a>
         <div class="nav-links">
@@ -328,7 +333,7 @@ function renderAboutPage() {
       </div>
       <div class="bio-layout">
         <div class="bio-image-wrapper">
-          <img src="/writer.png" alt="আলোময় চাকমা - Chakma poet and fiction writer from Bangladesh" class="bio-image" loading="lazy">
+          <img src="/writer-480.webp" alt="আলোময় চাকমা - Chakma poet and fiction writer from Bangladesh" class="bio-image" loading="lazy" decoding="async" width="480" height="415">
         </div>
         <div class="bio-text">
           <p class="body-lg text-secondary italic mb-stack-sm">কবি ও কথাসাহিত্যিক</p>
@@ -359,7 +364,7 @@ function renderBookPage(book) {
       </div>
       <div class="bio-layout">
         <div class="bio-image-wrapper">
-          <img src="${book.image}" alt="${escapeHtml(book.englishName)} - Chakma ${escapeHtml(book.genre)} book by Alomoy Chakma, ${escapeHtml(book.year)}" class="bio-image" loading="lazy">
+          <img src="${book.image}" alt="${escapeHtml(book.englishName)} - Chakma ${escapeHtml(book.genre)} book by Alomoy Chakma, ${escapeHtml(book.year)}" class="bio-image" loading="lazy" decoding="async" width="235" height="360">
         </div>
         <div class="bio-text">
           <p class="body-lg text-secondary italic mb-stack-sm">${escapeHtml(book.type)}</p>

@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    if (window.location.pathname && window.location.pathname !== '/') {
+      window.location.replace('/?p=' + encodeURIComponent(window.location.pathname + window.location.search + window.location.hash));
+    }
+  </script>
   <title>হক্কেং হক্কেং | আলোময় চাকমা</title>
   <meta name="description" content="Hakkeng Hakkeng, a Chakma children&#39;s rhymes book by Alomoy Chakma, published by পরিবার প্রকাশনী in 2017.">
   <meta name="robots" content="index, follow">
@@ -21,7 +26,7 @@
   <meta name="twitter:description" content="Hakkeng Hakkeng, a Chakma children&#39;s rhymes book by Alomoy Chakma, published by পরিবার প্রকাশনী in 2017.">
   <meta name="twitter:image" content="https://www.alomoychakma.com/og-banner.png">
   <link rel="stylesheet" href="/style.css">
-  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="icon" type="image/png" href="/favicon-96.png">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Book",
@@ -40,7 +45,7 @@
     "address": "ঢাকা, Bangladesh"
   },
   "genre": "Children's Rhymes",
-  "image": "https://www.alomoychakma.com/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.jpg"
+  "image": "https://www.alomoychakma.com/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.webp"
 }</script>
 </head>
 <body class="">
@@ -48,7 +53,7 @@
     <div class="container-max">
       <nav>
         <a href="/" class="logo" style="text-transform:none;">
-          <div class="logo-img-wrapper"><img src="/logo.png" alt="আলোময় চাকমা - Alomoy Chakma" class="logo-img" width="38" height="38"></div>
+          <div class="logo-img-wrapper"><img src="/logo-96.webp" alt="আলোময় চাকমা - Alomoy Chakma" class="logo-img" width="38" height="38" decoding="async"></div>
           <span>আলোময় চাকমা</span>
         </a>
         <div class="nav-links">
@@ -70,7 +75,7 @@
       </div>
       <div class="bio-layout">
         <div class="bio-image-wrapper">
-          <img src="/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.jpg" alt="Hakkeng Hakkeng - Chakma Children&#39;s Rhymes book by Alomoy Chakma, 2017" class="bio-image" loading="lazy">
+          <img src="/hakkeng-hakkeng-alomoy-chakma-chakma-rhyme-book.webp" alt="Hakkeng Hakkeng - Chakma Children&#39;s Rhymes book by Alomoy Chakma, 2017" class="bio-image" loading="lazy" decoding="async" width="235" height="360">
         </div>
         <div class="bio-text">
           <p class="body-lg text-secondary italic mb-stack-sm">ছড়াগ্রন্থ</p>

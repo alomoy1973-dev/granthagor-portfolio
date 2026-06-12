@@ -61,9 +61,9 @@
   --surface-variant: #ebdcc5;
 
   /* Typography */
-  --font-headline: 'Hind Siliguri', 'Playfair Display', serif;
-  --font-body: 'Hind Siliguri', 'EB Garamond', serif;
-  --font-label: 'Hind Siliguri', 'Inter', sans-serif;
+  --font-headline: "Nirmala UI", "Segoe UI", "Noto Sans Bengali", serif;
+  --font-body: "Nirmala UI", "Segoe UI", "Noto Sans Bengali", serif;
+  --font-label: "Nirmala UI", "Segoe UI", Arial, sans-serif;
 
   /* Spacing */
   --base: 8px;
@@ -955,25 +955,25 @@ textarea.input-minimalist {
 body.rhyme-reader-active .reader-bg {
   display: block;
   opacity: 0.34;
-  background-image: url('rhyme-bg.jpg');
+  background-image: url('rhyme-bg.webp');
 }
 
 body.poem-reader-active .reader-bg {
   display: block;
   opacity: 0.34;
-  background-image: url('poem-bg.jpg');
+  background-image: url('poem-bg.webp');
 }
 
 body.story-reader-active .reader-bg {
   display: block;
   opacity: 0.34;
-  background-image: url('story-bg.jpg');
+  background-image: url('story-bg.webp');
 }
 
 body.song-reader-active .reader-bg {
   display: block;
   opacity: 0.34;
-  background-image: url('story-bg.jpg');
+  background-image: url('story-bg.webp');
 }
 
 
