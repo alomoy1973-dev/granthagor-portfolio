@@ -738,7 +738,11 @@ function openReaderView(articleId, updateHash = true) {
         contentHtml += `<p class="body-lg">${para}</p>`;
         contentHtml += `<blockquote class="block-quote">${article.quote}</blockquote>`;
       } else {
-        contentHtml += `<p>${para}</p>`;
+        if (para.trim().startsWith('<div')) {
+          contentHtml += para;
+        } else {
+          contentHtml += `<p>${para}</p>`;
+        }
       }
     });
   }
