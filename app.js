@@ -19,11 +19,26 @@ async function loadWritingsData() {
     if (localStorage.getItem("granthagor_writings")) {
       try {
         const savedWritings = JSON.parse(localStorage.getItem("granthagor_writings"));
-        const savedIds = new Set(savedWritings.map((writing) => writing.id));
-        writings = [
-          ...savedWritings,
-          ...defaultWritings.filter((writing) => !savedIds.has(writing.id))
-        ];
+        // Merge: preserve default properties, but allow user customizations (like edited content)
+        writings = defaultWritings.map(defW => {
+          const savedW = savedWritings.find(s => s.id === defW.id);
+          if (savedW) {
+            return {
+              ...defW,
+              ...savedW,
+              // Force keep database connections and translator settings if defined in default
+              originalId: defW.originalId || savedW.originalId,
+              translator: defW.translator || savedW.translator,
+              badge: defW.badge || savedW.badge
+            };
+          }
+          return defW;
+        });
+        
+        // Also add any new custom items created by the user in admin panel (whose IDs are not in defaultWritings)
+        const defIds = new Set(defaultWritings.map(w => w.id));
+        const customWritings = savedWritings.filter(w => !defIds.has(w.id));
+        writings = [...writings, ...customWritings];
       } catch (e) {
         console.error("Error loading writings from localStorage:", e);
       }
