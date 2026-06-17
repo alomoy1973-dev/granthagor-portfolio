@@ -9,7 +9,7 @@ let writings = []; // Loaded from writings.json
 // Load writings data from external JSON (improves performance)
 async function loadWritingsData() {
   try {
-    const response = await fetch('./writings.json?v=1781014789828');
+    const response = await fetch('./writings.json?v=1781678855531');
     if (!response.ok) throw new Error('Failed to fetch writings.json');
     const defaultWritings = await response.json();
     writings = defaultWritings;
@@ -731,21 +731,76 @@ function openReaderView(articleId, updateHash = true) {
   // Build share bar HTML
   const shareBarHtml = getShareHtml(shareUrl, `${article.title} — আলোময় চাকমা`);
 
+  // Build translation-related HTML
+  let badgeHtml = `<span class="label-sm text-secondary uppercase tracking-widest block mb-2">${article.badge}</span>`;
+  let translatorHtml = "";
+  let translationLinkHtml = "";
+
+  if (article.category === "story") {
+    if (article.originalId) {
+      badgeHtml = `
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 0.75rem;">
+          <span class="translation-badge" style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(168,85,247,0.10)); border: 1px solid rgba(99,102,241,0.25); color: #6366f1; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px;">&#127760; বাংলা অনুবাদ</span>
+          <span class="label-sm text-secondary uppercase tracking-widest block">${article.badge}</span>
+        </div>
+      `;
+      translatorHtml = `<p class="translator-credit" style="font-size: 0.9rem; color: var(--text-secondary, #777); margin-top: 0.5rem;">অনুবাদক: <strong>${article.translator || 'মেনিলা চাকমা'}</strong></p>`;
+      
+      const original = writings.find(w => w.id === article.originalId);
+      if (original) {
+        translationLinkHtml = `
+          <div class="original-link-box" style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.03); border-left: 3px solid rgba(99,102,241,0.5); border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary, #555);">
+            <span>মূল চাকমা গল্প:</span>
+            <a href="#" class="switchToOriginal" data-id="${original.id}" style="color: #6366f1; font-weight: 600; text-decoration: none;">${original.title} &rarr;</a>
+          </div>
+        `;
+      }
+    } else {
+      const translation = writings.find(w => w.originalId === article.id);
+      if (translation) {
+        translationLinkHtml = `
+          <div class="original-link-box" style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.03); border-left: 3px solid rgba(99,102,241,0.5); border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary, #555);">
+            <span>🌐 বাংলা অনুবাদ পড়ুন:</span>
+            <a href="#" class="switchToTranslation" data-id="${translation.id}" style="color: #6366f1; font-weight: 600; text-decoration: none;">${translation.title} &rarr;</a>
+          </div>
+        `;
+      }
+    }
+  }
+
   elements.readerContent.innerHTML = `
     <div class="reader-header">
-      <span class="label-sm text-secondary uppercase tracking-widest block mb-2">${article.badge}</span>
+      ${badgeHtml}
       <h1 class="headline-lg">${serialNumBengali}. ${article.title}</h1>
       <div class="reader-meta">
         <span>${article.date}</span>
         <span style="margin: 0 12px;">—</span>
         <span>${article.readTime}</span>
       </div>
+      ${translationLinkHtml}
+      ${translatorHtml}
     </div>
     <div class="reader-content">
       ${contentHtml}
     </div>
     ${shareBarHtml}
   `;
+
+  // Bind translation switch clicks
+  const origLink = elements.readerContent.querySelector(".switchToOriginal");
+  if (origLink) {
+    origLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      openReaderView(origLink.getAttribute("data-id"));
+    });
+  }
+  const transLink = elements.readerContent.querySelector(".switchToTranslation");
+  if (transLink) {
+    transLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      openReaderView(transLink.getAttribute("data-id"));
+    });
+  }
 
   // Bind share events inside reader
   bindShareEvents(elements.readerContent);
