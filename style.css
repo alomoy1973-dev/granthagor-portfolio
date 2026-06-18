@@ -61,9 +61,9 @@
   --surface-variant: #ebdcc5;
 
   /* Typography */
-  --font-headline: "Nirmala UI", "Segoe UI", "Noto Sans Bengali", serif;
-  --font-body: "Nirmala UI", "Segoe UI", "Noto Sans Bengali", serif;
-  --font-label: "Nirmala UI", "Segoe UI", Arial, sans-serif;
+  --font-headline: "Hind Siliguri", "Noto Sans Bengali", sans-serif;
+  --font-body: "Hind Siliguri", "Noto Sans Bengali", sans-serif;
+  --font-label: "Hind Siliguri", "Inter", sans-serif;
 
   /* Spacing */
   --base: 8px;
@@ -703,7 +703,7 @@ header .btn-primary:hover {
   display: grid;
   grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.75fr);
   gap: 28px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .video-feature-layout > * {
@@ -713,7 +713,7 @@ header .btn-primary:hover {
 .video-frame {
   background-color: var(--primary);
   border: 1px solid var(--outline-variant);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 9 / 16;
   overflow: hidden;
   min-width: 0;
   max-width: 100%;
