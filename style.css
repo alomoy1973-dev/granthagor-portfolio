@@ -713,7 +713,7 @@ header .btn-primary:hover {
 .video-frame {
   background-color: var(--primary);
   border: 1px solid var(--outline-variant);
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   min-width: 0;
   max-width: 100%;
