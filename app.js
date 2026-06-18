@@ -43,9 +43,48 @@ async function loadWritingsData() {
         console.error("Error loading writings from localStorage:", e);
       }
     }
+
+    writings = withPinnedPost(writings);
   } catch(e) {
     console.warn('Could not load writings.json, falling back to empty:', e.message);
   }
+}
+
+function withPinnedPost(sourceWritings) {
+  if (sourceWritings.some(w => w.id === PINNED_POST_ID)) return sourceWritings;
+
+  const source = sourceWritings.find(w => w.id === PINNED_POST_SOURCE_ID);
+  const startIndex = source?.content?.findIndex(line => line === PINNED_POST_SERIES) ?? -1;
+  const content = startIndex >= 0
+    ? source.content.slice(startIndex)
+    : [
+        PINNED_POST_SERIES,
+        "__STANZA__",
+        `"${PINNED_POST_TITLE}"`,
+        "__STANZA__",
+        "দীঘোল্ পোজোচ্ বজর।",
+        "__STANZA__",
+        "ধুমো ছেরে ছেরে!",
+        "__STANZA__",
+        "গুলি ছেরে ছেরে!",
+        "__STANZA__",
+        "জুম্মবী, বানা তত্তেই বানা তত্তেই।"
+      ];
+
+  const pinnedPost = {
+    id: PINNED_POST_ID,
+    title: PINNED_POST_TITLE,
+    category: "poem",
+    badge: "কবিতা",
+    excerpt: "দীঘোল্ পোজোচ্ বজর। ধুমো ছেরে ছেরে! গুলি ছেরে ছেরে!",
+    date: "০৮/১১/২০১৪",
+    readTime: "10 মিনিট পাঠ",
+    isFeatured: true,
+    quote: "জুম্মবী, বানা তত্তেই বানা তত্তেই।",
+    content
+  };
+
+  return [pinnedPost, ...sourceWritings];
 }
 
 // 2. Application State
@@ -218,6 +257,11 @@ const elements = {
 const SITE_URL = "https://www.alomoychakma.com";
 const SITE_DEFAULT_TITLE = "গ্রন্থাগার | আলোময় চাকমা — চাঙমা সাহিত্য সম্ভার";
 const SITE_DEFAULT_DESC  = "আলোময় চাকমার সাহিত্যিক পোর্টফোলিও — চাঙমা ভাষার কবিতা, ছড়া, ছোটগল্প ও গান এবং গভীর জীবনানুভূতির এক ডিজিটাল সংগ্রহশালা।";
+const PINNED_POST_SOURCE_ID = "poem-26";
+const PINNED_POST_ID = "pin-poem-jummobi-tottei";
+const PINNED_POST_LABEL = "পিন পোস্ট কবিতা ১";
+const PINNED_POST_SERIES = "{ ফিরি ইচ্চা সৈন্যর ডায়েরীত্তুন্ }";
+const PINNED_POST_TITLE = "জুম্মবী তত্তেই";
 
 // ─── Dynamic SEO updater ───
 function updateSEOMeta({ title, description, url }) {
@@ -993,35 +1037,37 @@ function renderContent() {
   // Filter writings
   const filtered = writings.filter(w => category === "all" || w.category === category);
   
-  // A. Render Featured Card
-  const featured = writings.find(w => w.isFeatured);
-  if (featured && (category === "all" || category === featured.category)) {
-    const allStories = writings.filter(w => w.category === "story");
-    const sIdx = allStories.findIndex(s => s.id === featured.id);
-    const serialNum = toBengaliNumber(sIdx + 1);
+  // A. Render Pinned Post Card
+  const featured = writings.find(w => w.id === PINNED_POST_ID) || writings.find(w => w.isFeatured);
+  if (featured) {
+    const categoryWritings = writings.filter(w => w.category === featured.category);
+    const itemIdx = categoryWritings.findIndex(w => w.id === featured.id);
+    const serialNum = toBengaliNumber(itemIdx + 1);
     elements.featuredContainer.style.display = "block";
     elements.featuredContainer.innerHTML = `
-      <div class="grid-12">
-        <div class="col-8">
-          <div class="writing-card group" data-id="${featured.id}">
+      <div class="pinned-post-shell">
+        <div class="pinned-post-card writing-card group" data-id="${featured.id}">
+          <div class="pinned-post-kicker">
+            <span class="material-symbols-outlined" aria-hidden="true">push_pin</span>
+            <span>${PINNED_POST_LABEL}</span>
+          </div>
+          <div class="pinned-post-grid">
             <div>
-              <span class="card-category">${featured.badge}</span>
-              <h2 class="headline-md card-title">${serialNum}. ${featured.title}</h2>
+              <span class="card-category">${featured.badge} · ${PINNED_POST_SERIES}</span>
+              <h2 class="headline-md card-title">"${PINNED_POST_TITLE}"</h2>
               <p class="body-md card-excerpt">${featured.excerpt}</p>
             </div>
-            <div class="card-meta">
-              <span>${featured.date} — ${featured.readTime}</span>
-              <a href="#" class="card-link font-label-md">
-                গল্পটি পড়ুন <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-              </a>
+            <div class="pinned-post-preview" aria-hidden="true">
+              <p>দীঘোল্ পোজোচ্ বজর।</p>
+              <p>ধুমো ছেরে ছেরে!</p>
+              <p>গুলি ছেরে ছেরে!</p>
+              <p>জুম্মবী, বানা তত্তেই বানা তত্তেই।</p>
             </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="mood-card">
-            <img src="screen-feature.webp" alt="বই এবং দোয়াত কালির নান্দনিক ছবি" class="mood-image" width="239" height="480" decoding="async">
-            <div class="mood-overlay">
-              <p class="mood-quote">"${featured.quote}"</p>
+            <div class="card-meta pinned-post-meta">
+              <span>${featured.date} — ${featured.readTime} · কবিতা ${serialNum}</span>
+              <a href="#" class="card-link font-label-md">
+                পিন পোস্ট পড়ুন <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </a>
             </div>
           </div>
         </div>
