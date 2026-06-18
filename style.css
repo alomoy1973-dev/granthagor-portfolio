@@ -92,7 +92,7 @@ body {
   background-color: var(--background);
   color: var(--on-surface);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -112,32 +112,32 @@ h1, h2, h3, h4, h5, h6 {
 
 .headline-lg {
   font-family: var(--font-headline);
-  font-size: 42px;
+  font-size: 34px;
   font-weight: 700;
   line-height: 1.15;
 }
 
 .headline-md {
   font-family: var(--font-headline);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 600;
   line-height: 1.25;
 }
 
 .headline-sm {
   font-family: var(--font-headline);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .body-lg {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
 .body-md {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -1727,11 +1727,11 @@ footer {
     width: 100%;
   }
   
-  .headline-lg { font-size: 28px; }
-  .headline-md { font-size: 24px; }
-  .headline-sm { font-size: 18px; }
-  .body-lg { font-size: 16px; }
-  .body-md { font-size: 15px; }
+  .headline-lg { font-size: 24px; }
+  .headline-md { font-size: 20px; }
+  .headline-sm { font-size: 16px; }
+  .body-lg { font-size: 14px; }
+  .body-md { font-size: 13px; }
   
   .filter-bar {
     flex-direction: column;
