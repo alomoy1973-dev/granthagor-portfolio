@@ -742,7 +742,7 @@ header .btn-primary:hover {
 
 .video-book-link {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-columns: 100px minmax(0, 1fr);
   gap: 14px;
   align-items: center;
   border-top: 1px solid var(--outline-variant);
@@ -751,7 +751,7 @@ header .btn-primary:hover {
 }
 
 .video-book-link img {
-  width: 72px;
+  width: 100px;
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border: 1px solid var(--outline-variant);
