@@ -196,6 +196,9 @@
           </div>
           <span>আলোময় চাকমা</span>
         </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="মেনু খুলুন" aria-expanded="false">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
         <div class="nav-links">
           <a href="#" class="nav-link active" data-page="home">হোম</a>
           <a href="#" class="nav-link" data-page="home" id="navWritingsLink">লেখনী</a>
@@ -268,12 +271,11 @@
       <!-- Category Navigation / Filter Header -->
       <div class="reading-well">
         <div class="filter-bar">
-          <div class="filter-tabs">
-            <button class="filter-tab active" data-category="all">সব লেখা</button>
-            <button class="filter-tab" data-category="poem">কবিতা</button>
-            <button class="filter-tab" data-category="rhyme">ছড়া</button>
-            <button class="filter-tab" data-category="story">গল্প</button>
-            <button class="filter-tab" data-category="song">গান</button>
+          <div class="filter-tabs" role="tablist" aria-label="রচনার ধরন">
+            <button class="filter-tab active" data-category="poem" role="tab" aria-selected="true">কবিতা</button>
+            <button class="filter-tab" data-category="rhyme" role="tab" aria-selected="false">ছড়া</button>
+            <button class="filter-tab" data-category="story" role="tab" aria-selected="false">গল্প</button>
+            <button class="filter-tab" data-category="song" role="tab" aria-selected="false">গান</button>
           </div>
           <div class="filter-sort">
             <span class="material-symbols-outlined text-[18px]">sort</span>
@@ -636,4 +638,6 @@
   </noscript>
 </body>
 </html>
+
+
 

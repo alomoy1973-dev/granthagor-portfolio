@@ -264,13 +264,18 @@ const PINNED_POST_SERIES = "{ ফিরি ইচ্চা সৈন্যর �
 const PINNED_POST_TITLE = "জুম্মবী তত্তেই";
 
 // ─── Dynamic SEO updater ───
-function updateSEOMeta({ title, description, url }) {
+function updateSEOMeta({ title, description, url, ogType = "website" }) {
   const t = title || SITE_DEFAULT_TITLE;
   const d = description || SITE_DEFAULT_DESC;
   const u = url || SITE_URL + "/";
 
   document.title = t;
   setMeta("pageDesc",  d, "content");
+  
+  // Set og:type
+  const ogTypeMeta = document.querySelector('meta[property="og:type"]');
+  if (ogTypeMeta) ogTypeMeta.setAttribute("content", ogType);
+
   setMeta("ogTitle",   t, "content");
   setMeta("ogDesc",    d, "content");
   setMeta("ogUrl",     u, "content");
@@ -507,34 +512,36 @@ function clearArticleSchema() {
 
 // 4. Initialize Function
 async function init() {
-  // Load writings data from external JSON first (performance split)
-  await loadWritingsData();
-
-  // Hide and remove loading overlay
-  const loadingOverlay = document.getElementById("loadingOverlay");
-  if (loadingOverlay) {
-    loadingOverlay.classList.add("fade-out");
-    setTimeout(() => {
-      loadingOverlay.remove();
-    }, 450); // Matches CSS transition duration
-  }
-
   setupNavigation();
   setupFilters();
   setupForms();
-  renderContent();
-  // Route from pathname or redirect query parameter on load
+
+  // Set up initial shell route so users see the header/footer and bio immediately
   const urlParams = new URLSearchParams(window.location.search);
-  const redirectPath = urlParams.get('p');
-  if (redirectPath) {
-    window.history.replaceState(null, "", redirectPath);
-    routeFromPath(redirectPath);
-  } else {
-    const initialPath = window.location.pathname;
-    if (initialPath && initialPath !== "/") {
+  const initialPath = urlParams.get('p') || window.location.pathname;
+  if (!initialPath || initialPath === "/") {
+    switchPage("home", false);
+  } else if (initialPath === "/about") {
+    switchPage("about", false);
+  }
+
+  // Show loading state in poetry list area
+  const poemsList = document.getElementById("poemsList");
+  if (poemsList) {
+    poemsList.innerHTML = '<p style="text-align:center; padding:2rem; color:var(--text-secondary);">লোড হচ্ছে...</p>';
+  }
+
+  // Load writings data asynchronously without blocking the UI
+  loadWritingsData().then(() => {
+    renderContent();
+    
+    // Route to specific article or page now that data is available
+    if (initialPath && initialPath !== "/" && initialPath !== "/about") {
+      if (urlParams.get('p')) window.history.replaceState(null, "", initialPath);
       routeFromPath(initialPath);
     }
-  }
+  }).catch(console.error);
+
   // Listen to browser back/forward (History API)
   window.addEventListener("popstate", () => {
     routeFromPath(window.location.pathname);
@@ -760,7 +767,8 @@ function openReaderView(articleId, updateHash = true) {
   updateSEOMeta({
     title: `${serialNumBengali}. ${article.title} | ${article.badge} — আলোময় চাকমা`,
     description: articleDesc,
-    url: shareUrl
+    url: shareUrl,
+    ogType: "article"
   });
 
   // Inject per-article JSON-LD schema
@@ -968,12 +976,18 @@ function setupForms() {
 }
 
 function openContactModal(updateHash = true) {
-  elements.contactModal.style.display = "block";
-  // Force a reflow to trigger animation
-  elements.contactModal.offsetHeight;
-  elements.contactModal.classList.add("open");
-  elements.body.style.overflow = "hidden"; // Disable scroll when modal is open
+  const cModal = document.getElementById("contactModal");
+  if (!cModal) return;
+  cModal.style.display = "block";
+  cModal.offsetHeight;
+  cModal.classList.add("open");
+  elements.body.style.overflow = "hidden";
   if (updateHash) pushPath("contact");
+  updateSEOMeta({
+    title: "যোগাযোগ | আলোময় চাকমা",
+    description: "আলোময় চাকমার সাথে যোগাযোগ করুন।",
+    url: SITE_URL + "/contact"
+  });
 }
 
 function closeContactModal(updateHash = true) {
@@ -1260,7 +1274,7 @@ function renderContent() {
       const sIdx = allStories.findIndex(s => s.id === story.id);
       const serialNum = toBengaliNumber(sIdx + 1);
       storiesHtml += `
-        <div class="writing-card" data-id="${story.id}">
+        <article class="writing-card" data-id="${story.id}">
           <div>
             <span class="story-badge">${story.badge}</span>
             <h4 class="headline-sm" style="margin-bottom:12px;">${serialNum}. ${story.title}</h4>
@@ -1372,4 +1386,29 @@ function renderContent() {
 // Start Application — async init to await data loading
 document.addEventListener("DOMContentLoaded", () => init().catch(console.error));
 
+
+
+
+
+
+// --- Mobile Menu Toggle ---
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const navLinks = document.querySelector(".nav-links");
+  if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      mobileMenuBtn.setAttribute("aria-expanded", isOpen);
+      mobileMenuBtn.innerHTML = isOpen ? `<span class="material-symbols-outlined">close</span>` : `<span class="material-symbols-outlined">menu</span>`;
+    });
+    // Close menu when clicking a link
+    navLinks.querySelectorAll(".nav-link, .btn").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+        mobileMenuBtn.innerHTML = `<span class="material-symbols-outlined">menu</span>`;
+      });
+    });
+  }
+});
 

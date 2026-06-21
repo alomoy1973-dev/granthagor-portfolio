@@ -1,0 +1,12 @@
+{
+  "name": "granthagor-portfolio",
+  "version": "1.0.0",
+  "description": "Literary portfolio for Alomoy Chakma",
+  "scripts": {
+    "build": "node generate-static-pages.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.x"
+  }
+}
