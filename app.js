@@ -646,7 +646,7 @@ function setupNavigation() {
 
   const footerDevLink = document.getElementById("footerDevLink");
   const devModal = document.getElementById("devModal");
-  const closeDevModal = document.getElementById("closeDevModal");
+  const closeDevModalBtn = document.getElementById("closeDevModal");
 
   if (footerDevLink && devModal) {
     footerDevLink.addEventListener("click", (e) => {
@@ -655,8 +655,8 @@ function setupNavigation() {
     });
   }
 
-  if (closeDevModal && devModal) {
-    closeDevModal.addEventListener("click", (e) => {
+  if (closeDevModalBtn && devModal) {
+    closeDevModalBtn.addEventListener("click", (e) => {
       e.preventDefault();
       if (window.location.pathname === "/developer") {
         history.back();
@@ -943,8 +943,7 @@ function setupForms() {
           email:     email,
           message:   message,
           _subject:  "\u0997\u09cd\u09b0\u09a8\u09cd\u09a5\u09be\u0997\u09be\u09b0 \u2014 \u09a8\u09a4\u09c1\u09a8 \u09ac\u09be\u09b0\u09cd\u09a4\u09be: " + name,
-          _template: "table",
-          _captcha:  "false"
+          _template: "table"
         })
       });
 
@@ -1372,3 +1371,5 @@ function renderContent() {
 
 // Start Application — async init to await data loading
 document.addEventListener("DOMContentLoaded", () => init().catch(console.error));
+
+

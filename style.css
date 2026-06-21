@@ -88,6 +88,26 @@
   padding: 0;
 }
 
+/* Accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+}
+
 body {
   background-color: var(--background);
   color: var(--on-surface);
