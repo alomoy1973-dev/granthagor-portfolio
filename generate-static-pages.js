@@ -154,7 +154,7 @@ function pageShell({ title, description, canonical, body, schema, bodyClass = ''
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${SITE_URL}/og-banner.png">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=2">
   <link rel="icon" type="image/png" href="/favicon-96.png">
   ${schemaHtml}
 </head>
@@ -395,3 +395,4 @@ writePage('about', renderAboutPage());
 books.forEach((book) => writePage(path.join('books', book.slug), renderBookPage(book)));
 
 console.log(`Generated static SEO pages for ${writings.length} writings, ${Object.keys(categoryMeta).length} categories, ${books.length} books, and about.`);
+

@@ -1286,7 +1286,7 @@ function renderContent() {
               আরও পড়ুন <span class="material-symbols-outlined text-[16px]">open_in_new</span>
             </a>
           </div>
-        </div>
+        </article>
       `;
     });
     
@@ -1411,5 +1411,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 
 
