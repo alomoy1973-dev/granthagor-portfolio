@@ -752,8 +752,8 @@ header .btn-primary:hover {
 
 .video-book-link img {
   width: 100px;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
+  height: auto;
+  display: block;
   border: 1px solid var(--outline-variant);
   background-color: var(--surface-container);
 }
