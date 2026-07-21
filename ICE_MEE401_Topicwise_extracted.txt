@@ -1,0 +1,192 @@
+--- PAGE 1 ---
+MEE 401 — Internal Combustion Engines
+ Hajee Mohammad Danesh Science & Technology University, Dinajpur
+ Topic-wise Question Bank from Past Exams (2019, 2021, 2022)
+Legend: Each question is tagged with the exam year and the marks allotted in that year. ★ = question / topic repeated in
+2 different years. ★★ = question / topic repeated in all 3 years (most important). Note: the 2022 paper appears twice in
+the uploaded images (Image 2 and Image 3 are the same exam) and has been counted once.
+PART A — Theory of Engines, Cycles & Fuels
+1. Engine Classification & Basic Components ★
+ [2019, Q1a, 5 marks] Classify engine on the basis of various aspects.
+ [2021, Q1a, 8 marks] Classify internal combustion engine on the basis of different segments.
+ [2022, Q1a, 8 marks] With proper sketch briefly discuss about different components of a typical internal
+combustion engine.
+Repeated 2 times (2019, 2021 ask essentially the same classification question; 2022 covers the related topic of engine
+components).
+2. Air Standard Cycle — Basic Concepts
+ [2019, Q1b, 5 marks] What is air standard cycle? Draw ideal and actual air standard cycle.
+ [2019, Q2a, 5 marks] What are the main assumptions of an air standard cycle?
+Only asked in 2019 — not repeated.
+3. Valve Timing Diagram (4-stroke SI engine) ★
+ [2019, Q1c, 5 marks] Draw and explain the principle of valve timing diagram for a typical four stroke SI engine.
+ [2021, Q1b, 7 marks] Explain briefly valve timing diagram of a typical four-stroke SI engine.
+Repeated 2 times (2019, 2021).
+4. Two-Stroke SI Engine — Working Principle ★
+ [2022, Q1b, 7 marks] Describe the working principle of two stroke SI engine with proper sketch.
+ [2021, Q2b, 7 marks] Describe the working principle of two stroke SI engine with proper sketch.
+Exact repeat — 2 times (2022, 2021).
+5. Air Standard Efficiency Derivations ★★
+ [2019, Q2c, 5 marks] Derive an expression to find air standard efficiency of Otto cycle.
+ [2022, Q2a, 8 marks] Find out air standard efficiency of a constant volume cycle. Prove that higher compression
+ratio is the most effective way of improving the performance of the engine.
+ [2021, Q2a, 8 marks] Find out air standard efficiency of a diesel engine. Find out the mean effective pressure
+increases with the increase in initial pressure.
+This theme appears in ALL 3 years — air standard efficiency derivation for a different cycle (Otto / Constant Volume /
+Diesel) each time. Highly important topic.
+6. Numerical Problem — Constant Volume Cycle Gas Engine ★
+ [2022, Q2b, 7 marks] Gas engine on Constant Volume cycle, cylinder bore 280 mm, stroke 300 mm, clearance
+volume 1300 cm³, initial pressure 1 bar, initial temperature 28°C, max cycle temperature 1550°C. Determine
+pressure & temperature at salient points, air standard efficiency, work done, mean effective pressure and ideal
+power developed (45,000 working cycles/hour, cv = 0.718 kJ/kgK, R = 0.287 kJ/kgK).
+ [2021, Q3a, 8 marks] Identical numerical problem with the same data (same bore, stroke, clearance volume,
+pressures, temperatures and constants).
+
+
+--- PAGE 2 ---
+Exact same numerical problem repeated 2 times (2022, 2021) — must-practice question.
+7. P-V and T-S Diagrams (Otto, Diesel, Dual Cycles) ★
+ [2019, Q2b, 5 marks] Draw P-V and T-S diagram for Otto cycle, Diesel cycle and Dual cycle.
+ [2022, Q3a, 8 marks] Draw P-V and T-S diagram for ideal Otto cycle, Diesel cycle and Dual cycle.
+Exact repeat — 2 times (2019, 2022).
+8. Engine Knocking, Octane & Cetane Rating ★★
+ [2019, Q3a, 5 marks] What is engine knocking? Why engine knocks? What is Octane rating and Cetane rating of
+fuel?
+ [2022, Q4b, 7 marks] What is engine knocking? Why engine knocks? What is Octane rating and Cetane rating of
+fuel?
+ [2021, Q4b, 7 marks] What is engine knocking? Why engine knocks? What is Octane rating and Cetane rating of
+fuel?
+Exact same question repeated in ALL 3 years (2019, 2022, 2021) — the single most-repeated question in the whole
+question bank.
+9. IC Engine Fuels — Properties, Refining & Alternative Fuels
+ [2019, Q3b, 5 marks] What are the main requirements of IC engine fuel?
+ [2019, Q3c, 5 marks] What is the difference between LPG and LNG? Why is volatility important for SI engine
+fuel?
+ [2022, Q3b, 7 marks] Briefly explain refining process of petroleum.
+ [2022, Q4a, 8 marks] Is it suitable to use Hydrogen Gas as a fuel for IC engine? Briefly explain.
+ [2021, Q3b, 7 marks] Give a brief description of solid fuels. Can we use solid fuels in IC engine?
+ [2021, Q4a, 8 marks] Briefly explain different characteristics of CI engine fuels.
+'Fuels' is a recurring theme every year, but each year asks about a different fuel aspect — no exact repeat.
+PART B — Components, Systems & Short Notes
+10. Carburetor — Requirements & Working Principle ★
+ [2019, Q4a, 5 marks] What are the main requirements for an ideal carburetor?
+ [2019, Q4b, 5 marks] Write down the working principle for a simple carburetor.
+ [2021, PB-1a, 8 marks] What are the main requirements for an ideal carburetor? Briefly explain the working
+principle for a simple carburetor.
+2019's two sub-questions combine into the single 2021 question — counted as a repeat (2 times).
+11. Carburetor Types & Choke
+ [2019, Q4c, 5 marks] What is choke? What is the main purpose of a choke for a carburetor?
+ [2019, PB-1(a), part of 15] Short note: Down draught, Up draught, Horizontal Draught.
+ [2019, PB-1(b), part of 15] Short note: Why is ice formed in a carburetor?
+Only asked in 2019 — not repeated.
+12. Concentric / Eccentric Carburetor & Ignition System Comparison ★
+ [2022, PB-1b, 7 marks] What is concentric and eccentric carburetor? Comparison between battery and magneto
+ignition system.
+ [2021, PB-1b, 7 marks] What is concentric and eccentric carburetor? Briefly explain magneto ignition system.
+Repeated 2 times (2022, 2021) — same opening question, second half varies (comparison vs. explanation of magneto
+system).
+
+
+--- PAGE 3 ---
+13. Battery Ignition System & Spark Plug
+ [2019, PB-2a, 10 marks] Write down battery ignition system in detail.
+ [2019, PB-2b, 5 marks] What are the properties of a good spark plug?
+Only asked in 2019 (battery ignition system also reappears via Topic 12's comparison question in 2022) — not an exact
+repeat.
+14. Spark Plug & Fuel Injector (Short Note) ★
+ [2022, PB-4(c), part of 15] Short note: Spark plug and fuel injector.
+ [2021, PB-4(c), part of 15] Short note: Spark plug and fuel injector.
+Exact repeat — 2 times (2022, 2021).
+15. Condenser & Ballast Resistor (Short Note) ★
+ [2022, PB-4(d), part of 15] Short note: Condenser.
+ [2022, PB-4(e), part of 15] Short note: Ballast resistor.
+ [2021, PB-4(a), part of 15] Short note: Ballast resistor and distributor.
+'Ballast resistor' repeated 2 times (2022, 2021); 'Condenser' only in 2022.
+16. Lubrication System
+ [2022, PB-1a, 8 marks] Write down the wet sump lubrication system.
+Only asked in 2022 — not repeated.
+17. Engine Cooling — Necessity, Overcooling & Gas Temperature Curve ★
+ [2019, PB-3a, 5 marks] Write down disadvantages of overcooling.
+ [2022, PB-2a, 8 marks] Mention some necessity of engine cooling. Explain briefly gas temperature variation
+curve for a typical four stroke SI engine.
+ [2021, PB-2a, 8 marks] Mention some disadvantages of engine overcooling. Explain briefly gas temperature
+variation curve for a typical four stroke SI engine.
+'Disadvantages of overcooling' repeated 2 times (2019, 2021); 'gas temperature variation curve' repeated 2 times (2022,
+2021).
+18. Piston/Valve Cooling & Circulation Systems ★
+ [2019, PB-3b, 5 marks] How can a piston be cooled inside an engine?
+ [2019, PB-3c, 5 marks] Write down the working principle of forced or pump circulation system.
+ [2022, PB-4(b), part of 15] Short note: Piston cooling.
+ [2021, PB-2b, 7 marks] How can a valve be cooled? How does the thermosyphon circulation system work?
+'Piston cooling' repeated 2 times (2019, 2022); 'circulation system' theme repeated 2 times (2019 forced/pump, 2021
+thermosyphon).
+19. Air Cooling & Cooling Fins ★
+ [2022, PB-2b, 7 marks] How can an engine be air cooled? Mention different types of cooling fins.
+ [2019, PB-1(e), part of 15] Short note: Fins.
+Repeated 2 times (2019, 2022).
+20. Supercharger vs Turbocharger & Wankel Engine ★★
+ [2019, PB-1(g), part of 15] Short note: Turbocharger and Supercharger.
+ [2022, PB-3a, 8 marks] Mention the difference between supercharger and turbocharger. What is pollutant
+formation?
+ [2021, PB-3a, 8 marks] What is a Wankel engine? Mention the difference between supercharger and
+turbocharger.
+
+
+--- PAGE 4 ---
+'Supercharger vs Turbocharger' is asked in ALL 3 years (2019, 2022, 2021). 'Wankel engine' is also asked separately in
+2019 (PB-1f, short note) and again in 2021 — repeated 2 times.
+21. Two-Stroke Engine & Scavenging ★
+ [2022, PB-3b, 7 marks] Write down the advantages and disadvantages of two stroke engines.
+ [2022, PB-4(a), part of 15] Short note: Scavenging.
+ [2021, PB-3b, 7 marks] Briefly explain return flow scavenging. What is uniform scavenging?
+'Scavenging' repeated 2 times (2022 short note, 2021 detailed question).
+22. Engine Performance Parameters (IP, BP, BSFC)
+ [2019, PB-4a, 5 marks] Write briefly about Indicated power, brake power, and frictional power.
+ [2019, PB-4b, 5 marks] What is B.S.F.C.? Write down the difference between SI engine and CI engine.
+ [2019, PB-4c, 5 marks] Write down the working principle of four stroke SI engine.
+Only asked in 2019 — not repeated.
+23. Firing Order (Short Note) ★
+ [2019, PB-1(c), part of 15] Short note: Firing order of SI engine.
+ [2021, PB-4(b), part of 15] Short note: Firing order.
+Repeated 2 times (2019, 2021).
+24. Flash Point and Fire Point (Short Note) ★
+ [2019, PB-1(d), part of 15] Short note: Flash point and fire point.
+ [2021, PB-4(d), part of 15] Short note: Flash point and fire point.
+Exact repeat — 2 times (2019, 2021).
+25. Radiation Heat Transfer of an IC Engine (Short Note)
+ [2021, PB-4(e), part of 15] Short note: Radiation heat transfer of an IC engine.
+Only asked in 2021 — not repeated.
+Summary of Repeated Questions / Topics
+Across the 2019, 2021 and 2022 question papers, 18 out of 25 topic groups contain a question repeated in at
+least 2 years. The most important (repeated in all 3 years, ★★) are:
+Topic
+Question
+Years
+Engine Knocking / Octane &
+Cetane Rating
+What is engine knocking? Why engine knocks? What is
+Octane rating and Cetane rating of fuel?
+2019, 2021, 2022
+Air Standard Efficiency
+Derivation
+Derive / find air standard efficiency (Otto / Constant Volume /
+Diesel cycle, different each year)
+2019, 2021, 2022
+Supercharger vs Turbocharger
+Mention the difference between supercharger and
+turbocharger
+2019, 2021, 2022
+The remaining 15 repeated topics each appear in exactly 2 of the 3 years (★): Engine Classification &
+Components; Valve Timing Diagram; Two-Stroke SI Engine Working Principle; Constant Volume Cycle Numerical
+Problem; P-V/T-S Diagrams (Otto/Diesel/Dual); Ideal Carburetor Requirements & Simple Carburetor Working;
+Concentric/Eccentric Carburetor & Ignition Comparison; Spark Plug & Fuel Injector; Condenser & Ballast Resistor;
+Engine Cooling (Overcooling & Gas Temperature Curve); Piston/Valve Cooling & Circulation Systems; Air Cooling
+& Cooling Fins; Two-Stroke Engine & Scavenging; Firing Order; and Flash Point & Fire Point.
+
+
+--- PAGE 5 ---
+The remaining 7 topic groups appeared in only one of the three exams (no repeat): Air Standard Cycle Basics (2019), IC
+Engine Fuels — each year's specific fuel sub-question (2019/2021/2022), Carburetor Types & Choke (2019), Battery
+Ignition System & Spark Plug Properties (2019), Lubrication System (2022), Engine Performance Parameters —
+IP/BP/BSFC (2019), and Radiation Heat Transfer of an IC Engine (2021). Note: 'Supercharger vs Turbocharger' (★★) is
+grouped with 'Wankel Engine' (★, repeated in 2019 & 2021) under Topic 20 — Wankel Engine is not in the all-3-years
+table above since it only appears twice.

@@ -264,7 +264,7 @@ const PINNED_POST_SERIES = "{ ফিরি ইচ্চা সৈন্যর �
 const PINNED_POST_TITLE = "জুম্মবী তত্তেই";
 
 // ─── Dynamic SEO updater ───
-function updateSEOMeta({ title, description, url, ogType = "website" }) {
+function updateSEOMeta({ title, description, url, ogType = "website", keywords }) {
   const t = title || SITE_DEFAULT_TITLE;
   const d = description || SITE_DEFAULT_DESC;
   const u = url || SITE_URL + "/";
@@ -281,12 +281,39 @@ function updateSEOMeta({ title, description, url, ogType = "website" }) {
   setMeta("ogUrl",     u, "content");
   setMeta("twTitle",   t, "content");
   setMeta("twDesc",    d, "content");
+  if (keywords) setMeta("pageKeywords", keywords, "content");
   const canonical = document.getElementById("canonicalUrl");
   if (canonical) canonical.setAttribute("href", u);
 }
 function setMeta(id, value, attr) {
   const el = document.getElementById(id);
   if (el) el.setAttribute(attr, value);
+}
+
+// ─── Breadcrumb Schema Injector ───
+function updateBreadcrumbSchema(items) {
+  let el = document.getElementById("breadcrumbSchema");
+  if (!el) {
+    el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.id = "breadcrumbSchema";
+    document.head.appendChild(el);
+  }
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": item.name,
+      "item": item.url
+    }))
+  };
+  el.textContent = JSON.stringify(schema, null, 2);
+}
+function clearBreadcrumbSchema() {
+  const el = document.getElementById("breadcrumbSchema");
+  if (el) el.remove();
 }
 
 // ─── Share Utility ───
@@ -498,9 +525,13 @@ function updateArticleSchema(article, serialNum, shareUrl) {
     "genre": genreMap[article.category] || "Literature",
     "url": shareUrl,
     "description": article.excerpt ? article.excerpt.slice(0, 160) : undefined,
-    "position": serialNum
+    "position": serialNum,
+    "text": article.content
+      ? article.content.filter(line => line !== "__STANZA__").join(" ").slice(0, 500)
+      : undefined
   };
   if (!schema.description) delete schema.description;
+  if (!schema.text) delete schema.text;
 
   el.textContent = JSON.stringify(schema, null, 2);
 }
@@ -711,11 +742,13 @@ function switchPage(pageId, updateHash = true) {
     elements.readerView.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
     clearArticleSchema();
+    clearBreadcrumbSchema();
     if (updateHash) pushPath("home");
     updateSEOMeta({
       title: SITE_DEFAULT_TITLE,
       description: SITE_DEFAULT_DESC,
-      url: SITE_URL + "/"
+      url: SITE_URL + "/",
+      keywords: "চাকমা কবিতা, চাকমা ছড়া, চাকমা গল্প, চাকমা সাহিত্য, chakma kobita, chakma poem, chakma rhyme, chakma chhora, chakma story, chakma literature, আলোময় চাকমা, Alomoy Chakma, চাঙমা ভাষার কবিতা, Chakma language poetry, Chakma poet Bangladesh, chakma kobita alomoy chakma, পার্বত্য চট্টগ্রামের কবিতা, CHT poetry, indigenous literature Bangladesh, Chakma children rhyme, ফুল বারেঙ, হক্কেং হক্কেং, Ful Bareng, Hakkeng Hakkeng, Chakma literature online"
     });
   } else if (pageId === "about") {
     elements.homeView.style.display = "none";
@@ -723,12 +756,18 @@ function switchPage(pageId, updateHash = true) {
     elements.readerView.style.display = "none";
     window.scrollTo({ top: 0, behavior: "smooth" });
     clearArticleSchema();
+    clearBreadcrumbSchema();
     if (updateHash) pushPath("about");
     updateSEOMeta({
-      title: "পরিচিতি | আলোময় চাকমা",
-      description: "আলোময় চাকমা — চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত সাহিত্যের স্রষ্টার পরিচয়।",
-      url: SITE_URL + "/about"
+      title: "পরিচিতি | আলোময় চাকমা — Chakma Poet & Writer",
+      description: "আলোময় চাকমা — চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত সাহিত্যের স্রষ্টার পরিচয়, প্রকাশিত বই ও যোগাযোগের তথ্য।",
+      url: SITE_URL + "/about",
+      keywords: "আলোময় চাকমা, Alomoy Chakma, চাকমা কবি, Chakma poet, চাঙমা ভাষার লেখক, Chakma writer, পার্বত্য চট্টগ্রাম, CHT, indigenous poet Bangladesh, Chakma literature, চাকমা সাহিত্যিক"
     });
+    updateBreadcrumbSchema([
+      { name: "হোম", url: SITE_URL + "/" },
+      { name: "পরিচিতি", url: SITE_URL + "/about" }
+    ]);
   }
 }
 
@@ -762,17 +801,29 @@ function openReaderView(articleId, updateHash = true) {
 
   // Update SEO for this article
   const articleDesc = article.excerpt
-    ? `${article.title} — ${article.excerpt.slice(0, 130)}`
-    : `${article.badge} | আলোময় চাকমা`;
+    ? `${article.title} — আলোময় চাকমার ${article.badge} সংগ্রহ। ${article.excerpt.slice(0, 130)}`
+    : `${article.title} — আলোময় চাকমার ${article.badge} সংগ্রহ।`;
+  const categoryKeywords = {
+    poem:  'চাকমা কবিতা, chakma kobita, chakma poem, আলোময় চাকমা, Alomoy Chakma, চাঙমা ভাষার কবিতা, Chakma language poetry, indigenous literature Bangladesh',
+    rhyme: 'চাকমা ছড়া, chakma rhyme, chakma chhora, আলোময় চাকমা, Alomoy Chakma, Chakma children rhyme, indigenous literature Bangladesh',
+    story: 'চাকমা গল্প, chakma story, chakma golpo, আলোময় চাকমা, Alomoy Chakma, Chakma short story, indigenous literature Bangladesh',
+    song:  'চাকমা গান, chakma song, chakma gaan, আলোময় চাকমা, Alomoy Chakma, Chakma lyrics, indigenous music Bangladesh'
+  };
   updateSEOMeta({
     title: `${serialNumBengali}. ${article.title} | ${article.badge} — আলোময় চাকমা`,
     description: articleDesc,
     url: shareUrl,
-    ogType: "article"
+    ogType: "article",
+    keywords: categoryKeywords[article.category] || categoryKeywords.poem
   });
 
-  // Inject per-article JSON-LD schema
+  // Inject per-article JSON-LD schema + BreadcrumbList
   updateArticleSchema(article, serialNumInt, shareUrl);
+  updateBreadcrumbSchema([
+    { name: "হোম", url: SITE_URL + "/" },
+    { name: article.badge, url: `${SITE_URL}/category/${article.category}` },
+    { name: article.title, url: shareUrl }
+  ]);
 
   // Render details inside reader
   let contentHtml = "";
@@ -1070,11 +1121,8 @@ function renderContent() {
               <h2 class="headline-md card-title">"${PINNED_POST_TITLE}"</h2>
               <p class="body-md card-excerpt">${featured.excerpt}</p>
             </div>
-            <div class="pinned-post-preview" aria-hidden="true">
-              <p>দীঘোল্ পোজোচ্ বজর।</p>
-              <p>ধুমো ছেরে ছেরে!</p>
-              <p>গুলি ছেরে ছেরে!</p>
-              <p>জুম্মবী, বানা তত্তেই বানা তত্তেই।</p>
+            <div class="pinned-post-image" aria-hidden="true">
+              <img src="pin-post-hero.jpg" alt="জুম্মবী তত্তেই — কবিতার প্রসঙ্গ চিত্র" loading="lazy" />
             </div>
             <div class="card-meta pinned-post-meta">
               <span>${featured.date} — ${featured.readTime} · কবিতা ${serialNum}</span>

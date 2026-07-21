@@ -115,6 +115,27 @@ function makeDescription(value, fallback) {
   return text.length > 158 ? text.slice(0, 155).trim() + '...' : text;
 }
 
+function makeRichDescription(article, meta) {
+  const title = article.title || '';
+  const excerpt = article.excerpt || '';
+  const category = meta.bn;
+  const enCategory = meta.en;
+  const base = `${title} — আলোময় চাকমার ${category} সংগ্রহ। ${excerpt}`;
+  const text = stripTags(base);
+  return text.length > 158 ? text.slice(0, 155).trim() + '...' : text;
+}
+
+function getKeywords(category) {
+  const common = 'আলোময় চাকমা, Alomoy Chakma, চাঙমা ভাষার সাহিত্য, Chakma language literature, পার্বত্য চট্টগ্রামের সাহিত্য, CHT literature, indigenous literature Bangladesh';
+  const map = {
+    poem: 'চাকমা কবিতা, chakma kobita, chakma poem, chakma poetry, চাঙমা ভাষার কবিতা, Chakma language poetry, Chakma poet Bangladesh, চাকমা কবি, chakma kobita alomoy, ফুল বারেঙ, মনপুদি',
+    rhyme: 'চাকমা ছড়া, chakma rhyme, chakma chhora, Chakma children rhyme, indigenous poetry Bangladesh, হক্কেং হক্কেং, তিন্নোমুরি, নাউরি',
+    story: 'চাকমা গল্প, chakma story, chakma golpo, Chakma short story, CHT literature, indigenous literature Bangladesh',
+    song: 'চাকমা গান, chakma song, chakma gaan, Chakma lyrics, indigenous music Bangladesh'
+  };
+  return (map[category] || map.poem) + ', ' + common;
+}
+
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
@@ -125,8 +146,9 @@ function writePage(route, html) {
   fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
 }
 
-function pageShell({ title, description, canonical, body, schema, bodyClass = '' }) {
+function pageShell({ title, description, canonical, body, schema, keywords, bodyClass = '' }) {
   const schemaHtml = schema ? `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}</script>` : '';
+  const keywordsHtml = keywords ? `<meta name="keywords" content="${escapeHtml(keywords)}">` : '';
   return `<!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -139,11 +161,12 @@ function pageShell({ title, description, canonical, body, schema, bodyClass = ''
   </script>
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
+  ${keywordsHtml}
   <meta name="robots" content="index, follow">
   <meta name="author" content="আলোময় চাকমা">
   <link rel="canonical" href="${escapeHtml(canonical)}">
-  <link rel="alternate" hreflang="bn" href="${escapeHtml(canonical)}">
-  <link rel="alternate" hreflang="x-default" href="${escapeHtml(canonical)}">
+  <link rel="alternate" hreflang="bn" href="${escapeHtml(canonical)}" />
+  <link rel="alternate" hreflang="x-default" href="${escapeHtml(canonical)}" />
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="গ্রন্থাগার — আলোময় চাকমা">
   <meta property="og:title" content="${escapeHtml(title)}">
@@ -189,6 +212,7 @@ function pageShell({ title, description, canonical, body, schema, bodyClass = ''
         <a href="mailto:alomoyc6@gmail.com" class="footer-link">ইমেইল</a>
         <a href="https://www.facebook.com/share/18bFgu3zzu/" class="footer-link" target="_blank" rel="noopener">ফেসবুক</a>
         <a href="https://fulbareng.blogspot.com/search/label/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE?m=1" class="footer-link" target="_blank" rel="noopener">ব্লগ</a>
+        <a href="/privacy-policy" class="footer-link">গোপনীয়তা নীতি</a>
       </div>
     </div>
   </footer>
@@ -201,24 +225,47 @@ function personSchema() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     '@id': `${SITE_URL}/#author`,
-    name: 'Alomoy Chakma',
-    alternateName: 'আলোময় চাকমা',
+    name: 'আলোময় চাকমা',
+    alternateName: 'Alomoy Chakma',
+    description: 'চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত কবিতা, ছড়া, গল্প ও গানের রচয়িতা।',
+    email: 'alomoyc6@gmail.com',
     url: SITE_URL,
+    image: `${SITE_URL}/writer-480.webp`,
     sameAs: [
       'https://www.facebook.com/share/18bFgu3zzu/',
-      'https://fulbareng.blogspot.com/'
+      'https://fulbareng.blogspot.com/search/label/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE?m=1'
     ],
-    jobTitle: 'Poet and Fiction Writer',
-    description: 'Chakma language poet and fiction writer from the Chittagong Hill Tracts, Bangladesh',
-    knowsLanguage: ['Chakma', 'Bengali'],
-    nationality: 'Bangladeshi'
+    knowsLanguage: ['bn', 'চাঙমা'],
+    jobTitle: 'কবি ও কথাসাহিত্যিক',
+    nationality: {
+      '@type': 'Country',
+      name: 'Bangladesh'
+    }
+  };
+}
+
+function breadcrumbListSchema(items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: item.name,
+      item: item.url
+    }))
   };
 }
 
 function articleSchema(article, serial, canonical) {
   const typeMap = { story: 'Article', poem: 'CreativeWork', rhyme: 'CreativeWork', song: 'CreativeWork' };
   const genreMap = { story: 'Short Story', poem: 'Poetry', rhyme: 'Rhyme', song: 'Song' };
-  return {
+  // Build a text snippet from content (first 500 chars) for the schema
+  const textSnippet = (article.content || [])
+    .filter(line => line !== '__STANZA__')
+    .join(' ')
+    .slice(0, 500);
+  const schema = {
     '@context': 'https://schema.org',
     '@type': typeMap[article.category],
     headline: article.title,
@@ -228,8 +275,11 @@ function articleSchema(article, serial, canonical) {
     genre: genreMap[article.category],
     url: canonical,
     description: makeDescription(article.excerpt, `${article.badge} by Alomoy Chakma`),
-    position: serial
+    position: serial,
+    text: textSnippet
   };
+  if (!schema.text) delete schema.text;
+  return schema;
 }
 
 function bookSchema(book) {
@@ -255,7 +305,8 @@ function renderArticlePage(article, serial) {
   const meta = categoryMeta[article.category];
   const canonical = `${SITE_URL}/${article.category}/${serial}`;
   const title = `${article.title} | ${meta.bn} — আলোময় চাকমা`;
-  const description = makeDescription(`${article.title} — ${article.excerpt}`, `${meta.en} by Alomoy Chakma`);
+  const description = makeRichDescription(article, meta);
+  const keywords = getKeywords(article.category);
   const lines = (article.content || []).map((line) => {
     if (line === '__STANZA__') return '<p class="poem-stanza-break"></p>';
     return `<p class="${article.category === 'story' ? '' : 'poem-line'}">${escapeHtml(line)}</p>`;
@@ -274,12 +325,21 @@ function renderArticlePage(article, serial) {
       <div class="reader-content">${lines}</div>
       <p class="mt-stack-md"><a class="link-editorial" href="/category/${article.category}">${escapeHtml(meta.bn)} সংগ্রহে ফিরে যান</a></p>
     </article>`;
+  const schema = [
+    articleSchema(article, serial, canonical),
+    breadcrumbListSchema([
+      { name: 'হোম', url: SITE_URL + '/' },
+      { name: meta.bn, url: `${SITE_URL}/category/${article.category}` },
+      { name: article.title, url: canonical }
+    ])
+  ];
   return pageShell({
     title,
     description,
     canonical,
+    keywords,
     body,
-    schema: articleSchema(article, serial, canonical),
+    schema,
     bodyClass: `${article.category}-reader-active`
   });
 }
@@ -306,12 +366,8 @@ function renderCategoryPage(category, items) {
       <p class="body-md text-secondary">${items.length}টি লেখা এই বিভাগে সংরক্ষিত আছে।</p>
       <div class="poetry-list mt-stack-md">${links}</div>
     </section>`;
-  return pageShell({
-    title: `${meta.bn} সংগ্রহ | আলোময় চাকমা`,
-    description: meta.description,
-    canonical,
-    body,
-    schema: {
+  const schema = [
+    {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${meta.bn} সংগ্রহ`,
@@ -319,7 +375,19 @@ function renderCategoryPage(category, items) {
       description: meta.description,
       author: { '@id': `${SITE_URL}/#author` },
       inLanguage: 'bn'
-    }
+    },
+    breadcrumbListSchema([
+      { name: 'হোম', url: SITE_URL + '/' },
+      { name: meta.bn, url: canonical }
+    ])
+  ];
+  return pageShell({
+    title: `${meta.bn} সংগ্রহ | ${meta.en} — আলোময় চাকমা`,
+    description: `${meta.intro} ${meta.description}`,
+    canonical,
+    keywords: getKeywords(category),
+    body,
+    schema
   });
 }
 
@@ -345,12 +413,20 @@ function renderAboutPage() {
         </div>
       </div>
     </section>`;
+  const schema = [
+    personSchema(),
+    breadcrumbListSchema([
+      { name: 'হোম', url: SITE_URL + '/' },
+      { name: 'পরিচিতি', url: canonical }
+    ])
+  ];
   return pageShell({
-    title: 'পরিচিতি | আলোময় চাকমা',
-    description: 'Alomoy Chakma biography, published books, and Chakma literature archive from the Chittagong Hill Tracts, Bangladesh.',
+    title: 'পরিচিতি | আলোময় চাকমা — Chakma Poet & Writer',
+    description: 'আলোময় চাকমা — চাঙমা ভাষার কবি ও কথাসাহিত্যিক। পার্বত্য চট্টগ্রামের জীবন ও প্রকৃতি নিয়ে রচিত সাহিত্যের স্রষ্টার পরিচয়, প্রকাশিত বই ও যোগাযোগের তথ্য।',
     canonical,
+    keywords: 'আলোময় চাকমা, Alomoy Chakma, চাকমা কবি, Chakma poet, চাঙমা ভাষার লেখক, Chakma writer, পার্বত্য চট্টগ্রাম, CHT, indigenous poet Bangladesh, Chakma literature, চাকমা সাহিত্যিক',
     body,
-    schema: personSchema()
+    schema
   });
 }
 
@@ -374,12 +450,20 @@ function renderBookPage(book) {
         </div>
       </div>
     </article>`;
+  const schema = [
+    bookSchema(book),
+    breadcrumbListSchema([
+      { name: 'হোম', url: SITE_URL + '/' },
+      { name: book.name, url: canonical }
+    ])
+  ];
   return pageShell({
-    title: `${book.name} | আলোময় চাকমা`,
-    description: `${book.englishName}, a Chakma ${book.genre.toLowerCase()} book by Alomoy Chakma, published by ${book.publisher} in ${book.year}.`,
+    title: `${book.name} | আলোময় চাকমা — ${book.type}`,
+    description: `${book.englishName}, a Chakma ${book.genre.toLowerCase()} book by Alomoy Chakma, published by ${book.publisher} in ${book.year}. ${book.name} আলোময় চাকমার প্রকাশিত ${book.type}। PDF ডাউনলোড।`,
     canonical,
+    keywords: `${book.name}, ${book.englishName}, আলোময় চাকমা, Alomoy Chakma, চাকমা বই, Chakma book, ${book.genre}, indigenous literature Bangladesh, ${book.publisher}, ${book.place}`,
     body,
-    schema: bookSchema(book)
+    schema
   });
 }
 
