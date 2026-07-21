@@ -1121,8 +1121,11 @@ function renderContent() {
               <h2 class="headline-md card-title">"${PINNED_POST_TITLE}"</h2>
               <p class="body-md card-excerpt">${featured.excerpt}</p>
             </div>
-            <div class="pinned-post-image" aria-hidden="true">
-              <img src="pin-post-hero.jpg" alt="জুম্মবী তত্তেই — কবিতার প্রসঙ্গ চিত্র" loading="lazy" />
+            <div class="pinned-post-preview" aria-hidden="true">
+              <p>দীঘোল্ পোজোচ্ বজর।</p>
+              <p>ধুমো ছেরে ছেরে!</p>
+              <p>গুলি ছেরে ছেরে!</p>
+              <p>জুম্মবী, বানা তত্তেই বানা তত্তেই।</p>
             </div>
             <div class="card-meta pinned-post-meta">
               <span>${featured.date} — ${featured.readTime} · কবিতা ${serialNum}</span>

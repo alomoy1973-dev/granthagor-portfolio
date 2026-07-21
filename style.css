@@ -1434,8 +1434,8 @@ body.song-reader-active .reader-content p.poem-line {
   padding: 34px;
   border-color: #ead0a0;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(253, 246, 231, 0.82)),
-    url("poem-bg.webp") center / cover no-repeat;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(253, 246, 231, 0.72) 60%, rgba(200, 180, 140, 0.50) 100%),
+    url("pin-post-hero.jpg") center / cover no-repeat;
   box-shadow: 0 18px 38px rgba(83, 48, 14, 0.08);
   cursor: pointer;
 }
@@ -1476,29 +1476,20 @@ body.song-reader-active .reader-content p.poem-line {
   line-height: 1.5;
 }
 
-.pinned-post-image {
+.pinned-post-preview {
   align-self: stretch;
-  overflow: hidden;
-  border-radius: 4px;
-  position: relative;
+  padding: 24px;
+  border-left: 3px solid rgba(204, 102, 17, 0.4);
+  background: rgba(255, 250, 240, 0.72);
+  color: var(--on-surface-variant);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.8;
 }
 
-.pinned-post-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  min-height: 260px;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.3s ease;
-  filter: sepia(12%) saturate(90%);
+.pinned-post-preview p {
+  margin-bottom: 8px;
 }
-
-.pinned-post-card:hover .pinned-post-image img {
-  transform: scale(1.04);
-  filter: sepia(0%) saturate(100%);
-}
-
 
 .pinned-post-meta {
   grid-column: 1 / -1;
@@ -1734,9 +1725,9 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .pinned-post-image {
-    min-height: 240px;
-    border-radius: 0;
+  .pinned-post-preview {
+    border-left: 0;
+    border-top: 3px solid rgba(204, 102, 17, 0.4);
   }
 }
 
@@ -2051,8 +2042,9 @@ footer {
     justify-self: center;
   }
 
-  .pinned-post-image img {
-    min-height: 200px;
+  .pinned-post-preview {
+    font-size: 16px;
+    padding: 18px;
   }
 
   .pinned-post-meta {
